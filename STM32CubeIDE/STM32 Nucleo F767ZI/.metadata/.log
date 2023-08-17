@@ -1275,3 +1275,18 @@ java.lang.Exception: Resource '/FreeRTOS_lab_task' does not exist.
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-08-17 14:00:58.072
 !MESSAGE Indexed 'FreeRTOS_lab_task' (36 sources, 177 headers) in 3.45 sec: 18,154 declarations; 83,797 references; 2 unresolved inclusions; 147 syntax errors; 148 unresolved names (0.14%)
+!SESSION 2023-08-17 14:21:51.842 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-08-17 14:21:59.516
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-08-17 14:21:59.518
+!MESSAGE Log4j2 initialized with config file D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-08-17 14:22:10.957
+!MESSAGE Started RMI Server, listening on port 41337
