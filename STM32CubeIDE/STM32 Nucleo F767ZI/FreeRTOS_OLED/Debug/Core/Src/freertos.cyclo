@@ -1,0 +1,4 @@
+../Core/Src/freertos.c:70:6:dashboard	1
+../Core/Src/freertos.c:100:6:MX_FREERTOS_Init	1
+../Core/Src/freertos.c:145:6:StartDefaultTask	1
+../Core/Src/freertos.c:164:6:StartOLEDPrintTask	1
