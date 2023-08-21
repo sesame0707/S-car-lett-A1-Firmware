@@ -1,0 +1,4 @@
+../Core/Src/freertos.c:70:6:vApplicationGetIdleTaskMemory	1
+../Core/Src/freertos.c:84:6:MX_FREERTOS_Init	1
+../Core/Src/freertos.c:127:6:StartDefaultTask	1
+../Core/Src/freertos.c:147:6:StartWiFiReceiveTask	1

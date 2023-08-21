@@ -1,261 +1,46 @@
-12:01:23 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
+19:36:54 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
 make -j12 all 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
+arm-none-eabi-gcc "../Core/Src/stm32f7xx_it.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f7xx_it.d" -MT"Core/Src/stm32f7xx_it.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f7xx_it.o"
+../Core/Src/stm32f7xx_it.c: In function 'USART1_IRQHandler':
+../Core/Src/stm32f7xx_it.c:170:9: warning: implicit declaration of function 'Wifi_RxCallBack' [-Wimplicit-function-declaration]
+  170 |         Wifi_RxCallBack();
+      |         ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "FreeRTOS_WiFi.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_WiFi.elf
+ 
+arm-none-eabi-size   FreeRTOS_WiFi.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_WiFi.elf  > "FreeRTOS_WiFi.list"
    text	   data	    bss	    dec	    hex	filename
-  61664	    464	  23680	  85808	  14f30	FreeRTOS_OLED.elf
+  48232	    436	  22396	  71064	  11598	FreeRTOS_WiFi.elf
 Finished building: default.size.stdout
  
-12:02:22 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
+Finished building: FreeRTOS_WiFi.list
+ 
+19:36:59 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
 make -j12 all 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
+arm-none-eabi-size   FreeRTOS_WiFi.elf 
    text	   data	    bss	    dec	    hex	filename
-  61664	    464	  23680	  85808	  14f30	FreeRTOS_OLED.elf
+  48232	    436	  22396	  71064	  11598	FreeRTOS_WiFi.elf
 Finished building: default.size.stdout
  
-12:04:09 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
+19:38:56 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
 make -j12 all 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
+arm-none-eabi-size   FreeRTOS_WiFi.elf 
    text	   data	    bss	    dec	    hex	filename
-  61664	    464	  23680	  85808	  14f30	FreeRTOS_OLED.elf
+  48232	    436	  22396	  71064	  11598	FreeRTOS_WiFi.elf
 Finished building: default.size.stdout
  
-12:37:53 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
+19:39:46 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-../Core/Src/freertos.c: In function 'dashboard':
-../Core/Src/freertos.c:76:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   76 |     ssd1306_WriteString(header, Font_11x18, White);
-      |                         ^~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-../Core/Src/freertos.c:82:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   82 |     ssd1306_WriteString(logotype, Font_16x26, White);
-      |                         ^~~~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
+arm-none-eabi-size   FreeRTOS_WiFi.elf 
    text	   data	    bss	    dec	    hex	filename
-  41612	    440	  23664	  65716	  100b4	FreeRTOS_OLED.elf
+  48232	    436	  22396	  71064	  11598	FreeRTOS_WiFi.elf
 Finished building: default.size.stdout
  
-Finished building: FreeRTOS_OLED.list
- 
-12:41:45 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
+19:41:22 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-../Core/Src/freertos.c: In function 'dashboard':
-../Core/Src/freertos.c:76:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   76 |     ssd1306_WriteString(header, Font_11x18, White);
-      |                         ^~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-../Core/Src/freertos.c:82:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   82 |     ssd1306_WriteString(logotype, Font_16x24, White);
-      |                         ^~~~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
+arm-none-eabi-size   FreeRTOS_WiFi.elf 
    text	   data	    bss	    dec	    hex	filename
-  41232	    440	  23664	  65336	   ff38	FreeRTOS_OLED.elf
+  48232	    436	  22396	  71064	  11598	FreeRTOS_WiFi.elf
 Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:42:36 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-../Core/Src/freertos.c: In function 'dashboard':
-../Core/Src/freertos.c:76:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   76 |     ssd1306_WriteString(header, Font_11x18, White);
-      |                         ^~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-../Core/Src/freertos.c:82:35: error: 'Font_16x23' undeclared (first use in this function); did you mean 'Font_16x24'?
-   82 |     ssd1306_WriteString(logotype, Font_16x23, White);
-      |                                   ^~~~~~~~~~
-      |                                   Font_16x24
-../Core/Src/freertos.c:82:35: note: each undeclared identifier is reported only once for each function it appears in
-../Core/Src/freertos.c:82:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   82 |     ssd1306_WriteString(logotype, Font_16x23, White);
-      |                         ^~~~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-make: *** [Core/Src/subdir.mk:64: Core/Src/freertos.o] Error 1
-"make -j12 all" terminated with exit code 2. Build might be incomplete.
-12:43:05 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-../Core/Src/freertos.c: In function 'dashboard':
-../Core/Src/freertos.c:76:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   76 |     ssd1306_WriteString(header, Font_11x18, White);
-      |                         ^~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-../Core/Src/freertos.c:82:25: warning: pointer targets in passing argument 1 of 'ssd1306_WriteString' differ in signedness [-Wpointer-sign]
-   82 |     ssd1306_WriteString(logotype, Font_11x18, White);
-      |                         ^~~~~~~~
-      |                         |
-      |                         uint8_t * {aka unsigned char *}
-In file included from ../Core/Src/freertos.c:28:
-../Core/Inc/ssd1306.h:148:32: note: expected 'char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
-  148 | char ssd1306_WriteString(char* str, FontDef Font, SSD1306_COLOR color);
-      |                          ~~~~~~^~~
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  36656	    432	  23664	  60752	   ed50	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:44:33 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  39712	    440	  23664	  63816	   f948	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:45:57 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  39712	    440	  23664	  63816	   f948	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:46:34 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  38572	    440	  23664	  62676	   f4d4	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:47:26 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  38572	    440	  23664	  62676	   f4d4	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:47:56 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  38572	    440	  23664	  62676	   f4d4	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:48:15 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  38572	    440	  23664	  62676	   f4d4	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:49:11 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  38556	    440	  23664	  62660	   f4c4	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
- 
-12:49:50 **** Incremental Build of configuration Debug for project FreeRTOS_OLED ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_OLED.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_OLED\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_OLED.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_OLED.elf
- 
-arm-none-eabi-size   FreeRTOS_OLED.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_OLED.elf  > "FreeRTOS_OLED.list"
-   text	   data	    bss	    dec	    hex	filename
-  38572	    440	  23664	  62676	   f4d4	FreeRTOS_OLED.elf
-Finished building: default.size.stdout
- 
-Finished building: FreeRTOS_OLED.list
  
