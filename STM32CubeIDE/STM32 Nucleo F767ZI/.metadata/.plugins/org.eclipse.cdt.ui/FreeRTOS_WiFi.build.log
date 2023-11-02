@@ -1,17 +1,17 @@
-18:08:33 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
+19:05:49 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/WifiUser.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/WifiUser.d" -MT"Core/Src/WifiUser.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/WifiUser.o"
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
 arm-none-eabi-gcc -o "FreeRTOS_WiFi.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: FreeRTOS_WiFi.elf
  
 arm-none-eabi-size   FreeRTOS_WiFi.elf 
 arm-none-eabi-objdump -h -S  FreeRTOS_WiFi.elf  > "FreeRTOS_WiFi.list"
    text	   data	    bss	    dec	    hex	filename
-  48232	    436	  22396	  71064	  11598	FreeRTOS_WiFi.elf
+  48208	    436	  22396	  71040	  11580	FreeRTOS_WiFi.elf
 Finished building: default.size.stdout
  
 Finished building: FreeRTOS_WiFi.list
  
 
-18:08:34 Build Finished. 0 errors, 0 warnings. (took 1s.50ms)
+19:05:50 Build Finished. 0 errors, 0 warnings. (took 1s.53ms)
 

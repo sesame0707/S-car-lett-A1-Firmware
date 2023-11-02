@@ -1,4 +1,4 @@
-../Core/Src/freertos.c:70:6:vApplicationGetIdleTaskMemory	24	static
-../Core/Src/freertos.c:84:6:MX_FREERTOS_Init	72	static
-../Core/Src/freertos.c:127:6:StartDefaultTask	16	static
-../Core/Src/freertos.c:147:6:StartWiFiReceiveTask	16	static
+../Core/Src/freertos.c:71:6:vApplicationGetIdleTaskMemory	24	static
+../Core/Src/freertos.c:85:6:MX_FREERTOS_Init	72	static
+../Core/Src/freertos.c:128:6:StartDefaultTask	16	static
+../Core/Src/freertos.c:149:6:StartWiFiReceiveTask	16	static
