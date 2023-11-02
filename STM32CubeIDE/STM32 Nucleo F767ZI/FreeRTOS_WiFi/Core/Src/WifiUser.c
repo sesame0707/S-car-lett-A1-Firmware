@@ -8,16 +8,16 @@ void	Wifi_UserInit(void)
   Wifi_SetMode(WifiMode_SoftAp);
 
 //  while (Wifi_Station_ConnectToAp("L70_9587","33559366",NULL) == false);
-  char *SSID = "to_ja";
-  char *password = "00000000";
+  char SSID[] = "s_car_lett_A1";
+  char password[] = "00000000";
   uint8_t channel = 1;
   WifiEncryptionType_t WifiEncryptionType = WifiEncryptionType_Open;
   uint8_t MaxConnections_1_to_4 = 1;
-  _Bool HiddenSSID = false;
+  bool HiddenSSID = false;
 
 
-//  while (Wifi_SoftAp_Create(SSID, password, channel, WifiEncryptionType, MaxConnections_1_to_4, HiddenSSID) == false);
-  _Bool created = Wifi_SoftAp_Create(SSID, password, channel, WifiEncryptionType, MaxConnections_1_to_4, HiddenSSID);
+  while (Wifi_SoftAp_Create(SSID, password, channel, WifiEncryptionType, MaxConnections_1_to_4, HiddenSSID) == false);
+ 
     
 }
 //#######################################################################################
