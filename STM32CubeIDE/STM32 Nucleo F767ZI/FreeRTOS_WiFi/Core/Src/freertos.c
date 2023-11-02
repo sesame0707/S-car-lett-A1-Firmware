@@ -22,6 +22,7 @@
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
+#include "WiFi.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -127,7 +128,10 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+//	bool reseted = Wifi_FactoryReset();
 	Wifi_Init(osPriorityNormal);
+	Wifi_UserInit();
+//	Wifi_Restart();
   /* Infinite loop */
   for(;;)
   {

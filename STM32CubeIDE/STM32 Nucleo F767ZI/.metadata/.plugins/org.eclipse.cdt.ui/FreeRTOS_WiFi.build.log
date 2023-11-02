@@ -1,10 +1,10 @@
-19:41:22 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
+16:16:37 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
 make -j12 all 
 arm-none-eabi-size   FreeRTOS_WiFi.elf 
    text	   data	    bss	    dec	    hex	filename
-  48232	    436	  22396	  71064	  11598	FreeRTOS_WiFi.elf
+  48208	    436	  22396	  71040	  11580	FreeRTOS_WiFi.elf
 Finished building: default.size.stdout
  
 
-19:41:22 Build Finished. 0 errors, 0 warnings. (took 299ms)
+16:16:38 Build Finished. 0 errors, 0 warnings. (took 301ms)
 
