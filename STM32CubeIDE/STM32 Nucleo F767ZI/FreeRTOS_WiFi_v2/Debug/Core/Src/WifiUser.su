@@ -1,0 +1,4 @@
+../Core/Src/WifiUser.c:5:6:Wifi_UserInit	8	static
+../Core/Src/WifiUser.c:15:7:Wifi_UserProcess	8	static
+../Core/Src/WifiUser.c:36:7:Wifi_UserGetUdpData	16	static
+../Core/Src/WifiUser.c:41:7:Wifi_UserGetTcpData	16	static
