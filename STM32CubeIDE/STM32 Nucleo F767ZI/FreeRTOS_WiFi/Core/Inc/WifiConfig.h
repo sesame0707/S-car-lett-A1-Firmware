@@ -1,7 +1,7 @@
 #ifndef	_WIFICONFIG_H
 #define	_WIFICONFIG_H
 
-#define		_WIFI_USART									huart3
+#define		_WIFI_USART									huart1
 
 #define		_WIFI_RX_SIZE								512
 #define		_WIFI_RX_FOR_DATA_SIZE			1024
