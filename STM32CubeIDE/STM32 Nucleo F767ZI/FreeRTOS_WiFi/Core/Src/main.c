@@ -59,16 +59,6 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t wifi_data[] = "A/0";
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	//if( huart == huart1 )
-		Wifi_RxCallBack();
-	//	HAL_UART_Receive_IT(&huart1,&wifi_data[0],1);
-
-}//-------------------------------------------
-
 
 /* USER CODE END 0 */
 
@@ -110,9 +100,6 @@ int main(void)
 
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
-
-
-	HAL_UART_Receive_IT(&huart1,&wifi_data[0],1);
 
   /* Start scheduler */
   osKernelStart();

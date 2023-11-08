@@ -8,7 +8,7 @@ void	Wifi_UserInit(void)
   Wifi_SetMode(WifiMode_SoftAp);
 
 //  while (Wifi_Station_ConnectToAp("L70_9587","33559366",NULL) == false);
-  char SSID[] = "TO_JA";
+  char SSID[] = "s_car_lett_A1";
   char password[] = "00000000";
   uint8_t channel = 1;
   WifiEncryptionType_t WifiEncryptionType = WifiEncryptionType_Open;

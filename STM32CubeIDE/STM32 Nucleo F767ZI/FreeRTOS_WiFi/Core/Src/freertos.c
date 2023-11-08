@@ -22,7 +22,6 @@
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
-#include "usart.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -128,14 +127,12 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
-//	Wifi_Init(osPriorityNormal);
-	uint8_t data[] = "HELLO WORLD \r\n";
+	Wifi_Init(osPriorityNormal);
   /* Infinite loop */
   for(;;)
   {
-	  HAL_UART_Transmit(&huart1, data, sizeof(data), 10);
 	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
-	  osDelay(1000);
+	  osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
 }
