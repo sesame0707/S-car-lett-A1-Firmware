@@ -127,12 +127,14 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+//	Wifi_UserInit();
 	Wifi_Init(osPriorityNormal);
+
   /* Infinite loop */
   for(;;)
   {
 	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
-	  osDelay(500);
+//	  osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
 }
