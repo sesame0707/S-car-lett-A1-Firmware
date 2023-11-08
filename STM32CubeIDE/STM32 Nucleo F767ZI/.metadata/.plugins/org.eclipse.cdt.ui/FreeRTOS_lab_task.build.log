@@ -1,10 +1,10 @@
-22:54:48 **** Incremental Build of configuration Debug for project FreeRTOS_lab_task ****
-make -j12 all 
+16:28:09 **** Build of configuration Debug for project FreeRTOS_lab_task ****
+make -j8 all 
 arm-none-eabi-size   FreeRTOS_lab_task.elf 
    text	   data	    bss	    dec	    hex	filename
   20360	    104	  20904	  41368	   a198	FreeRTOS_lab_task.elf
 Finished building: default.size.stdout
  
 
-22:54:48 Build Finished. 0 errors, 0 warnings. (took 305ms)
+16:28:10 Build Finished. 0 errors, 0 warnings. (took 606ms)
 
