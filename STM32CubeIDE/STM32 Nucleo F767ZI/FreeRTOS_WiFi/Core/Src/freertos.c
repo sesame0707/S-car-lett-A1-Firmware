@@ -22,6 +22,7 @@
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
+#include "Wifi.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -134,7 +135,7 @@ void StartDefaultTask(void const * argument)
   for(;;)
   {
 	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
-//	  osDelay(500);
+	  osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
 }
