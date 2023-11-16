@@ -88,7 +88,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  ESP_Init("ares", "willysmc", "192.168.4.1");
+  ESP_Init("ares", "willysmc", "192.168.0.102");
 
   /* USER CODE END 2 */
 

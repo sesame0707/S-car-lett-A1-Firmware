@@ -9,11 +9,10 @@
 
 #include "UartRingbuffer.h"
 #include <string.h>
-#include <usart.h>
 
 /**** define the UART you are using  ****/
 
-extern UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart1;
 
 #define uart &huart1
 
