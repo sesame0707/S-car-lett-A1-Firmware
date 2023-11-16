@@ -1,137 +1,265 @@
-13:35:34 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/usart.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/usart.d" -MT"Core/Src/usart.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/usart.o"
-arm-none-eabi-gcc -o "FreeRTOS_WiFi_v3.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi_v3\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi_v3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_WiFi_v3.elf
- 
-arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_WiFi_v3.elf  > "FreeRTOS_WiFi_v3.list"
+13:15:56 **** Build of configuration Debug for project FreeRTOS_lab_task ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_lab_task.elf 
    text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
+  20360	    104	  20904	  41368	   a198	FreeRTOS_lab_task.elf
 Finished building: default.size.stdout
  
-Finished building: FreeRTOS_WiFi_v3.list
- 
-13:38:35 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
-make -j12 all 
-arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
-   text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
-Finished building: default.size.stdout
- 
-13:47:28 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
-make -j12 all 
-arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
-   text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
-Finished building: default.size.stdout
- 
-23:33:48 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
-make -j12 all 
-arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
-   text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
-Finished building: default.size.stdout
- 
-23:35:48 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
-make -j12 all 
-arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
-   text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
-Finished building: default.size.stdout
- 
-23:44:01 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
-make -j12 all 
-arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
-   text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
-Finished building: default.size.stdout
- 
-23:47:28 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
-make -j12 all 
-arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
-   text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
-Finished building: default.size.stdout
- 
-23:50:50 **** Build of configuration Debug for project FreeRTOS_WiFi ****
-make -j12 all 
-arm-none-eabi-size   FreeRTOS_WiFi.elf 
-   text	   data	    bss	    dec	    hex	filename
-  48224	    436	  22396	  71056	  11590	FreeRTOS_WiFi.elf
-Finished building: default.size.stdout
- 
-23:52:02 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+13:18:10 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/freertos.c: In function 'StartDefaultTask':
-../Core/Src/freertos.c:131:9: warning: implicit declaration of function 'Wifi_Init' [-Wimplicit-function-declaration]
-  131 |         Wifi_Init(osPriorityNormal);
-      |         ^~~~~~~~~
-arm-none-eabi-gcc -o "FreeRTOS_WiFi.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_WiFi.elf
+../Core/Src/freertos.c:119:40: error: 'rx_buffer' undeclared (first use in this function)
+  119 |         HAL_UART_Receive_IT( &huart1, *rx_buffer, sizeof (*rx_buffer) );
+      |                                        ^~~~~~~~~
+../Core/Src/freertos.c:119:40: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:46: Core/Src/freertos.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:18:25 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+../Core/Src/freertos.c: In function 'StartDefaultTask':
+../Core/Src/freertos.c:119:39: error: 'rx_buffer' undeclared (first use in this function)
+  119 |         HAL_UART_Receive_IT( &huart1, rx_buffer, sizeof (rx_buffer) );
+      |                                       ^~~~~~~~~
+../Core/Src/freertos.c:119:39: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:46: Core/Src/freertos.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:19:26 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/freertos.c: In function 'StartDefaultTask':
+../Core/Src/freertos.c:119:39: error: 'rx_buffer' undeclared (first use in this function)
+  119 |         HAL_UART_Receive_IT( &huart1, rx_buffer, sizeof (rx_buffer) );
+      |                                       ^~~~~~~~~
+../Core/Src/freertos.c:119:39: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:46: Core/Src/freertos.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:20:25 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
  
-arm-none-eabi-size   FreeRTOS_WiFi.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_WiFi.elf  > "FreeRTOS_WiFi.list"
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
    text	   data	    bss	    dec	    hex	filename
-  48224	    436	  22396	  71056	  11590	FreeRTOS_WiFi.elf
+  29128	    104	  21024	  50256	   c450	FreeRTOS_UART_interrupts.elf
 Finished building: default.size.stdout
  
-Finished building: FreeRTOS_WiFi.list
+Finished building: FreeRTOS_UART_interrupts.list
  
-23:52:48 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_WiFi.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_WiFi.elf
- 
-arm-none-eabi-size   FreeRTOS_WiFi.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_WiFi.elf  > "FreeRTOS_WiFi.list"
+13:20:52 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
    text	   data	    bss	    dec	    hex	filename
-  48224	    436	  22396	  71056	  11590	FreeRTOS_WiFi.elf
+  29128	    104	  21024	  50256	   c450	FreeRTOS_UART_interrupts.elf
 Finished building: default.size.stdout
  
-Finished building: FreeRTOS_WiFi.list
+13:22:17 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:178:39: error: 'rx_buffer' undeclared (first use in this function); did you mean 'tx_buffer'?
+  178 |         HAL_UART_Receive_IT( &huart1, rx_buffer, sizeof (rx_buffer) );
+      |                                       ^~~~~~~~~
+      |                                       tx_buffer
+../Core/Src/main.c:178:39: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:178:30: warning: passing argument 1 of 'HAL_UART_Receive_IT' from incompatible pointer type [-Wincompatible-pointer-types]
+  178 |         HAL_UART_Receive_IT( &huart1, rx_buffer, sizeof (rx_buffer) );
+      |                              ^~~~~~~
+      |                              |
+      |                              UART_HandleTypeDef ** {aka struct __UART_HandleTypeDef **}
+In file included from ../Core/Inc/stm32f7xx_hal_conf.h:415,
+                 from ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:1556:59: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'UART_HandleTypeDef **' {aka 'struct __UART_HandleTypeDef **'}
+ 1556 | HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+      |                                       ~~~~~~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:46: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:22:33 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:178:38: error: 'rx_buffer' undeclared (first use in this function); did you mean 'tx_buffer'?
+  178 |         HAL_UART_Receive_IT( huart1, rx_buffer, sizeof (rx_buffer) );
+      |                                      ^~~~~~~~~
+      |                                      tx_buffer
+../Core/Src/main.c:178:38: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:46: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:22:56 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:178:39: error: 'rx_buffer' undeclared (first use in this function); did you mean 'tx_buffer'?
+  178 |         HAL_UART_Receive_IT( &huart1, rx_buffer, sizeof (rx_buffer) );
+      |                                       ^~~~~~~~~
+      |                                       tx_buffer
+../Core/Src/main.c:178:39: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:46: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:23:21 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/freertos.c: In function 'StartDefaultTask':
+../Core/Src/freertos.c:120:39: error: 'rx_buffer' undeclared (first use in this function)
+  120 |         HAL_UART_Receive_IT( &huart1, rx_buffer, sizeof (rx_buffer) );
+      |                                       ^~~~~~~~~
+../Core/Src/freertos.c:120:39: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:46: Core/Src/freertos.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:24:01 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
  
-23:57:47 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_WiFi.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_WiFi.elf
- 
-arm-none-eabi-size   FreeRTOS_WiFi.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_WiFi.elf  > "FreeRTOS_WiFi.list"
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
    text	   data	    bss	    dec	    hex	filename
-  48224	    436	  22396	  71056	  11590	FreeRTOS_WiFi.elf
+  29160	    104	  21024	  50288	   c470	FreeRTOS_UART_interrupts.elf
 Finished building: default.size.stdout
  
-Finished building: FreeRTOS_WiFi.list
+Finished building: FreeRTOS_UART_interrupts.list
  
-23:58:10 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_WiFi.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_WiFi.elf
- 
-arm-none-eabi-size   FreeRTOS_WiFi.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_WiFi.elf  > "FreeRTOS_WiFi.list"
+13:24:07 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
    text	   data	    bss	    dec	    hex	filename
-  48224	    436	  22396	  71056	  11590	FreeRTOS_WiFi.elf
+  29160	    104	  21024	  50288	   c470	FreeRTOS_UART_interrupts.elf
 Finished building: default.size.stdout
  
-Finished building: FreeRTOS_WiFi.list
+13:32:24 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+../Core/Src/freertos.c: In function 'StartDefaultTask':
+../Core/Src/freertos.c:119:17: warning: unused variable 'data' [-Wunused-variable]
+  119 |         uint8_t data[] = "A\r\n";
+      |                 ^~~~
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
  
-23:58:42 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
-arm-none-eabi-gcc -o "FreeRTOS_WiFi.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FreeRTOS_WiFi.elf
- 
-arm-none-eabi-size   FreeRTOS_WiFi.elf 
-arm-none-eabi-objdump -h -S  FreeRTOS_WiFi.elf  > "FreeRTOS_WiFi.list"
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
    text	   data	    bss	    dec	    hex	filename
-  48224	    436	  22396	  71056	  11590	FreeRTOS_WiFi.elf
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
 Finished building: default.size.stdout
  
-Finished building: FreeRTOS_WiFi.list
+Finished building: FreeRTOS_UART_interrupts.list
+ 
+13:33:44 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+13:34:35 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+13:34:59 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+13:41:30 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
+ 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
+   text	   data	    bss	    dec	    hex	filename
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+Finished building: FreeRTOS_UART_interrupts.list
+ 
+13:41:34 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+13:47:36 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
+ 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
+   text	   data	    bss	    dec	    hex	filename
+  27256	    104	  21016	  48376	   bcf8	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+Finished building: FreeRTOS_UART_interrupts.list
+ 
+13:51:46 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
+ 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
+   text	   data	    bss	    dec	    hex	filename
+  28552	    104	  21024	  49680	   c210	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+Finished building: FreeRTOS_UART_interrupts.list
+ 
+13:52:20 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28552	    104	  21024	  49680	   c210	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+13:52:57 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
+ 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
+   text	   data	    bss	    dec	    hex	filename
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+Finished building: FreeRTOS_UART_interrupts.list
+ 
+14:01:44 **** Incremental Build of configuration Debug for project FreeRTOS_UART_interrupts ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "FreeRTOS_UART_interrupts.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_UART_interrupts\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_UART_interrupts.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_UART_interrupts.elf
+ 
+arm-none-eabi-size   FreeRTOS_UART_interrupts.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_UART_interrupts.elf  > "FreeRTOS_UART_interrupts.list"
+   text	   data	    bss	    dec	    hex	filename
+  28568	    104	  21024	  49696	   c220	FreeRTOS_UART_interrupts.elf
+Finished building: default.size.stdout
+ 
+Finished building: FreeRTOS_UART_interrupts.list
  
