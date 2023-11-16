@@ -1,10 +1,17 @@
-23:47:28 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
+01:11:31 **** Incremental Build of configuration Debug for project FreeRTOS_WiFi_v3 ****
 make -j12 all 
+arm-none-eabi-gcc "../Core/Src/UartRingbuffer.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UartRingbuffer.d" -MT"Core/Src/UartRingbuffer.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UartRingbuffer.o"
+arm-none-eabi-gcc -o "FreeRTOS_WiFi_v3.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_WiFi_v3\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_WiFi_v3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: FreeRTOS_WiFi_v3.elf
+ 
 arm-none-eabi-size   FreeRTOS_WiFi_v3.elf 
+arm-none-eabi-objdump -h -S  FreeRTOS_WiFi_v3.elf  > "FreeRTOS_WiFi_v3.list"
    text	   data	    bss	    dec	    hex	filename
-  19264	    120	   2528	  21912	   5598	FreeRTOS_WiFi_v3.elf
+  21456	    120	   2528	  24104	   5e28	FreeRTOS_WiFi_v3.elf
 Finished building: default.size.stdout
  
+Finished building: FreeRTOS_WiFi_v3.list
+ 
 
-23:47:28 Build Finished. 0 errors, 0 warnings. (took 252ms)
+01:11:32 Build Finished. 0 errors, 0 warnings. (took 856ms)
 
