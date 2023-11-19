@@ -87,6 +87,10 @@ void Error_Handler(void);
 #define USB_PowerSwitchOn_GPIO_Port GPIOG
 #define USB_OverCurrent_Pin GPIO_PIN_7
 #define USB_OverCurrent_GPIO_Port GPIOG
+#define API_START_ENGIN_LEDs_Pin GPIO_PIN_8
+#define API_START_ENGIN_LEDs_GPIO_Port GPIOC
+#define API_BRAKE_LEDs_Pin GPIO_PIN_9
+#define API_BRAKE_LEDs_GPIO_Port GPIOC
 #define USB_SOF_Pin GPIO_PIN_8
 #define USB_SOF_GPIO_Port GPIOA
 #define USB_VBUS_Pin GPIO_PIN_9
@@ -101,6 +105,12 @@ void Error_Handler(void);
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
+#define API_WITHDRAW_LEDs_Pin GPIO_PIN_10
+#define API_WITHDRAW_LEDs_GPIO_Port GPIOC
+#define API_TURN_RIGHT_LEDs_Pin GPIO_PIN_11
+#define API_TURN_RIGHT_LEDs_GPIO_Port GPIOC
+#define API_TURN_LEFT_LEDs_Pin GPIO_PIN_12
+#define API_TURN_LEFT_LEDs_GPIO_Port GPIOC
 #define RMII_TX_EN_Pin GPIO_PIN_11
 #define RMII_TX_EN_GPIO_Port GPIOG
 #define RMII_TXD0_Pin GPIO_PIN_13

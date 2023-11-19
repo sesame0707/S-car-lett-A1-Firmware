@@ -97,6 +97,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_IT( &huart1, rx_buffer, 1 );
 
   /* USER CODE END 2 */
 
@@ -104,7 +105,6 @@ int main(void)
   osKernelInitialize();  /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
 
-	HAL_UART_Receive_IT( &huart1, rx_buffer, 1 );
   /* Start scheduler */
   osKernelStart();
 
@@ -175,17 +175,42 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
-
 void HAL_UART_RxCpltCallback( UART_HandleTypeDef *huart1x ) {
-	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-//	moj_parser();
-	HAL_UART_Receive_IT( &huart1, rx_buffer, 1 );
+	// API dispatcher
+	switch(rx_buffer[0]) {
+	case 0x1:
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+		break;
+	case 0x2:
+		HAL_GPIO_TogglePin(API_START_ENGIN_LEDs_GPIO_Port, API_START_ENGIN_LEDs_Pin);
+		break;
+	case 0x3:
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+		break;
+	case 0x4:
+		HAL_GPIO_TogglePin(API_TURN_LEFT_LEDs_GPIO_Port, API_TURN_LEFT_LEDs_Pin);
+		break;
+	case 0x5:
+		HAL_GPIO_TogglePin(API_TURN_RIGHT_LEDs_GPIO_Port, API_TURN_RIGHT_LEDs_Pin);
+		break;
+	case 0x6:
+		HAL_GPIO_TogglePin(API_TURN_LEFT_LEDs_GPIO_Port, API_TURN_LEFT_LEDs_Pin);
+		HAL_GPIO_TogglePin(API_TURN_RIGHT_LEDs_GPIO_Port, API_TURN_RIGHT_LEDs_Pin);
+		break;
+	case 0x7:
+		HAL_GPIO_TogglePin(API_TURN_RIGHT_LEDs_GPIO_Port, API_TURN_RIGHT_LEDs_Pin);
+		HAL_GPIO_TogglePin(API_TURN_LEFT_LEDs_GPIO_Port, API_TURN_LEFT_LEDs_Pin);
+		break;
+	default:
+	}
+
+	HAL_UART_Receive_IT( &huart1, rx_buffer, 1 );	// used for "opening" ST MCU for future interrupts on RX
 }
 
 void HAL_UART_TxCpltCallback( UART_HandleTypeDef *huart1 ){
 	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
 }
+
 /* USER CODE END 4 */
 
 /**
