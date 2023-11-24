@@ -1,0 +1,371 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * File Name          : freertos.c
+  * Description        : Code for freertos applications
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2023 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Includes ------------------------------------------------------------------*/
+#include "FreeRTOS.h"
+#include "task.h"
+#include "main.h"
+#include "cmsis_os.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+/* USER CODE BEGIN Variables */
+extern uint8_t rx_buffer[];
+
+/* USER CODE END Variables */
+/* Definitions for defaultTask */
+osThreadId_t defaultTaskHandle;
+const osThreadAttr_t defaultTask_attributes = {
+  .name = "defaultTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for API_dispatcher */
+osThreadId_t API_dispatcherHandle;
+const osThreadAttr_t API_dispatcher_attributes = {
+  .name = "API_dispatcher",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for API_START_ENGIN */
+osThreadId_t API_START_ENGINHandle;
+const osThreadAttr_t API_START_ENGIN_attributes = {
+  .name = "API_START_ENGIN",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for API_BRAKE */
+osThreadId_t API_BRAKEHandle;
+const osThreadAttr_t API_BRAKE_attributes = {
+  .name = "API_BRAKE",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for API_WITHDRAW */
+osThreadId_t API_WITHDRAWHandle;
+const osThreadAttr_t API_WITHDRAW_attributes = {
+  .name = "API_WITHDRAW",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for API_TURN_LEFT */
+osThreadId_t API_TURN_LEFTHandle;
+const osThreadAttr_t API_TURN_LEFT_attributes = {
+  .name = "API_TURN_LEFT",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for API_TURN_RIGHT */
+osThreadId_t API_TURN_RIGHTHandle;
+const osThreadAttr_t API_TURN_RIGHT_attributes = {
+  .name = "API_TURN_RIGHT",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+/* Private function prototypes -----------------------------------------------*/
+/* USER CODE BEGIN FunctionPrototypes */
+
+/* USER CODE END FunctionPrototypes */
+
+void StartDefaultTask(void *argument);
+void StartAPI_dispatcher(void *argument);
+void StartAPI_START_ENGIN(void *argument);
+void StartAPI_BRAKE(void *argument);
+void StartAPI_WITHDRAW(void *argument);
+void StartAPI_TURN_LEFT(void *argument);
+void StartAPI_TURN_RIGHT(void *argument);
+
+void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+
+/**
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
+void MX_FREERTOS_Init(void) {
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* USER CODE BEGIN RTOS_MUTEX */
+  /* add mutexes, ... */
+  /* USER CODE END RTOS_MUTEX */
+
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* add semaphores, ... */
+  /* USER CODE END RTOS_SEMAPHORES */
+
+  /* USER CODE BEGIN RTOS_TIMERS */
+  /* start timers, add new ones, ... */
+  /* USER CODE END RTOS_TIMERS */
+
+  /* USER CODE BEGIN RTOS_QUEUES */
+  /* add queues, ... */
+  /* USER CODE END RTOS_QUEUES */
+
+  /* Create the thread(s) */
+  /* creation of defaultTask */
+  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+
+  /* creation of API_dispatcher */
+  API_dispatcherHandle = osThreadNew(StartAPI_dispatcher, NULL, &API_dispatcher_attributes);
+
+  /* creation of API_START_ENGIN */
+  API_START_ENGINHandle = osThreadNew(StartAPI_START_ENGIN, NULL, &API_START_ENGIN_attributes);
+
+  /* creation of API_BRAKE */
+  API_BRAKEHandle = osThreadNew(StartAPI_BRAKE, NULL, &API_BRAKE_attributes);
+
+  /* creation of API_WITHDRAW */
+  API_WITHDRAWHandle = osThreadNew(StartAPI_WITHDRAW, NULL, &API_WITHDRAW_attributes);
+
+  /* creation of API_TURN_LEFT */
+  API_TURN_LEFTHandle = osThreadNew(StartAPI_TURN_LEFT, NULL, &API_TURN_LEFT_attributes);
+
+  /* creation of API_TURN_RIGHT */
+  API_TURN_RIGHTHandle = osThreadNew(StartAPI_TURN_RIGHT, NULL, &API_TURN_RIGHT_attributes);
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  /* add threads, ... */
+  /* USER CODE END RTOS_THREADS */
+
+  /* USER CODE BEGIN RTOS_EVENTS */
+  /* add events, ... */
+  /* USER CODE END RTOS_EVENTS */
+
+}
+
+/* USER CODE BEGIN Header_StartDefaultTask */
+/**
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartDefaultTask */
+void StartDefaultTask(void *argument)
+{
+  /* USER CODE BEGIN StartDefaultTask */
+//	uint8_t data[] = "A\r\n";
+
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskDelete(NULL);
+//	  osDelay(1);
+//	  HAL_UART_Transmit_IT ( &huart1, data, sizeof (data) );
+
+  }
+  /* USER CODE END StartDefaultTask */
+}
+
+/* USER CODE BEGIN Header_StartAPI_dispatcher */
+/**
+* @brief Function implementing the API_dispatcher thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartAPI_dispatcher */
+void StartAPI_dispatcher(void *argument)
+{
+  /* USER CODE BEGIN StartAPI_dispatcher */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);	// suspend itself
+//	  ulTaskNotifyTake(pdTRUE, (TickType_t) portMAX_DELAY);
+
+	  switch(rx_buffer[0]) {
+	  	case 0x1:	// Stop vehicle.
+//	  		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+	  		// NOT IMPLEMENTED YET
+	  		vTaskResume(API_BRAKEHandle);
+	  		break;
+	  	case 0x2:	// Toggle driving lights.
+//	  		HAL_GPIO_TogglePin(API_START_ENGIN_LEDs_GPIO_Port, API_START_ENGIN_LEDs_Pin);
+	  		vTaskResume(API_START_ENGINHandle);
+	  		break;
+	  	case 0x3:	// Toggle RGB stripe.
+//	  		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+	  		// NOT IMPLEMENTED YET
+	  		vTaskResume(API_WITHDRAWHandle);
+	  		break;
+	  	case 0x4:	// Turn left blinker on.
+//	  		HAL_GPIO_TogglePin(API_TURN_LEFT_LEDs_GPIO_Port, API_TURN_LEFT_LEDs_Pin);
+	  		vTaskResume(API_TURN_LEFTHandle);
+	  		break;
+	  	case 0x5:	// Turn right blinker on.
+//	  		HAL_GPIO_TogglePin(API_TURN_RIGHT_LEDs_GPIO_Port, API_TURN_RIGHT_LEDs_Pin);
+	  		vTaskResume(API_TURN_RIGHTHandle);
+	  		break;
+	  	case 0x6:	// Park to the left.
+//	  		HAL_GPIO_TogglePin(API_TURN_LEFT_LEDs_GPIO_Port, API_TURN_LEFT_LEDs_Pin);
+//	  		HAL_GPIO_TogglePin(API_TURN_RIGHT_LEDs_GPIO_Port, API_TURN_RIGHT_LEDs_Pin);
+	  		// NOT IMPLEMENTED YET
+	  		vTaskResume(API_TURN_LEFTHandle);
+	  		vTaskSuspend(API_TURN_RIGHTHandle);
+	  		osDelay(400);
+	  		vTaskResume(API_TURN_LEFTHandle);
+	  		break;
+	  	case 0x7:	// Park to the right.
+//	  		HAL_GPIO_TogglePin(API_TURN_RIGHT_LEDs_GPIO_Port, API_TURN_RIGHT_LEDs_Pin);
+//	  		HAL_GPIO_TogglePin(API_TURN_LEFT_LEDs_GPIO_Port, API_TURN_LEFT_LEDs_Pin);
+	  		// NOT IMPLEMENTED YET
+	  		vTaskResume(API_TURN_RIGHTHandle);
+	  		vTaskSuspend(API_TURN_RIGHTHandle);
+	  		osDelay(400);
+	  		vTaskResume(API_TURN_RIGHTHandle);
+	  		break;
+	  	default:
+	  	}
+  }
+  /* USER CODE END StartAPI_dispatcher */
+}
+
+/* USER CODE BEGIN Header_StartAPI_START_ENGIN */
+/**
+* @brief Function implementing the API_START_ENGIN thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartAPI_START_ENGIN */
+void StartAPI_START_ENGIN(void *argument)
+{
+  /* USER CODE BEGIN StartAPI_START_ENGIN */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+	  HAL_GPIO_TogglePin(API_START_ENGIN_LEDs_GPIO_Port, API_START_ENGIN_LEDs_Pin);
+  }
+  /* USER CODE END StartAPI_START_ENGIN */
+}
+
+/* USER CODE BEGIN Header_StartAPI_BRAKE */
+/**
+* @brief Function implementing the API_BRAKE thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartAPI_BRAKE */
+void StartAPI_BRAKE(void *argument)
+{
+  /* USER CODE BEGIN StartAPI_BRAKE */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+	  HAL_GPIO_TogglePin(API_BRAKE_LEDs_GPIO_Port, API_BRAKE_LEDs_Pin);
+	  osDelay(500);
+	  HAL_GPIO_TogglePin(API_BRAKE_LEDs_GPIO_Port, API_BRAKE_LEDs_Pin);
+  }
+  /* USER CODE END StartAPI_BRAKE */
+}
+
+/* USER CODE BEGIN Header_StartAPI_WITHDRAW */
+/**
+* @brief Function implementing the API_WITHDRAW thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartAPI_WITHDRAW */
+void StartAPI_WITHDRAW(void *argument)
+{
+  /* USER CODE BEGIN StartAPI_WITHDRAW */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+	  HAL_GPIO_TogglePin(API_WITHDRAW_LEDs_GPIO_Port, API_WITHDRAW_LEDs_Pin);
+	  osDelay(500);
+	  HAL_GPIO_TogglePin(API_WITHDRAW_LEDs_GPIO_Port, API_WITHDRAW_LEDs_Pin);
+  }
+  /* USER CODE END StartAPI_WITHDRAW */
+}
+
+/* USER CODE BEGIN Header_StartAPI_TURN_LEFT */
+/**
+* @brief Function implementing the API_TURN_LEFT thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartAPI_TURN_LEFT */
+void StartAPI_TURN_LEFT(void *argument)
+{
+  /* USER CODE BEGIN StartAPI_TURN_LEFT */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+	  for(int i=0; i<6; i++)
+	  {
+		  HAL_GPIO_TogglePin(API_TURN_LEFT_LEDs_GPIO_Port, API_TURN_LEFT_LEDs_Pin);
+		  osDelay(400);
+	  }
+  }
+  /* USER CODE END StartAPI_TURN_LEFT */
+}
+
+/* USER CODE BEGIN Header_StartAPI_TURN_RIGHT */
+/**
+* @brief Function implementing the API_TURN_RIGHT thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartAPI_TURN_RIGHT */
+void StartAPI_TURN_RIGHT(void *argument)
+{
+  /* USER CODE BEGIN StartAPI_TURN_RIGHT */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+	  for(int i=0; i<6; i++)
+	  {
+		  HAL_GPIO_TogglePin(API_TURN_RIGHT_LEDs_GPIO_Port, API_TURN_RIGHT_LEDs_Pin);
+		  osDelay(400);
+	  }
+  }
+  /* USER CODE END StartAPI_TURN_RIGHT */
+}
+
+/* Private application code --------------------------------------------------*/
+/* USER CODE BEGIN Application */
+
+/* USER CODE END Application */
+
