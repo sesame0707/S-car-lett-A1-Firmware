@@ -1,8 +1,9 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_UART_interrupts Debug
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_UART_interrupts Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_BLDC_motor Debug
 eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_BLDC_motor\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_OLED\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_OLED\ Debug/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRTOS_UART_interrupts\ Debug/activeLaunchMode=run

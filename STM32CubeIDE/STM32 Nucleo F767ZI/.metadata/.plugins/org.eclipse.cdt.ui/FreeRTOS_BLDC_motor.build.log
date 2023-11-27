@@ -1,0 +1,10 @@
+00:11:52 **** Incremental Build of configuration Debug for project FreeRTOS_BLDC_motor ****
+make -j12 all 
+arm-none-eabi-size   FreeRTOS_BLDC_motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14936	     20	   1820	  16776	   4188	FreeRTOS_BLDC_motor.elf
+Finished building: default.size.stdout
+ 
+
+00:11:52 Build Finished. 0 errors, 0 warnings. (took 253ms)
+
