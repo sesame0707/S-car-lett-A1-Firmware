@@ -30,7 +30,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define Calibrate 1
+//#define Calibrate 1
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -67,8 +67,8 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-	ADC_Converted = map(ADC_Data, 0, 4095, 50, 100);
-	TIM2->CCR4 = ADC_Converted;
+//	ADC_Converted = map(ADC_Data, 0, 4095, 50, 100);
+//	TIM2->CCR4 = ADC_Converted;
 
 //	HAL_ADC_Start_IT(&hadc1);
 //	HAL_ADC_Start_DMA(&hadc1, (uint32_t *)&ADC_Data, 1);
@@ -124,18 +124,19 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  TIM2->CCR4 = 55;
-	  HAL_Delay(1000);
-	  TIM2->CCR4 = 60;
-	  HAL_Delay(1000);
-	  TIM2->CCR4 = 65;
-	  HAL_Delay(1000);
-	  TIM2->CCR4 = 70;
-	  HAL_Delay(1000);
-	  TIM2->CCR4 = 65;
-	  HAL_Delay(1000);
-	  TIM2->CCR4 = 60;
-	  HAL_Delay(1000);
+	  ADC_Converted = map(ADC_Data, 0, 4095, 50, 100);
+//	  TIM2->CCR4 = 55;
+//	  HAL_Delay(1000);
+//	  TIM2->CCR4 = 60;
+//	  HAL_Delay(1000);
+//	  TIM2->CCR4 = 65;
+//	  HAL_Delay(1000);
+//	  TIM2->CCR4 = 70;
+//	  HAL_Delay(1000);
+//	  TIM2->CCR4 = 65;
+//	  HAL_Delay(1000);
+//	  TIM2->CCR4 = 60;
+//	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -187,7 +188,7 @@ void SystemClock_Config(void)
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV16;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK)

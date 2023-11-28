@@ -1,5 +1,5 @@
 ../Core/Src/main.c:63:6:map	1
 ../Core/Src/main.c:68:6:HAL_ADC_ConvCpltCallback	1
 ../Core/Src/main.c:82:5:main	1
-../Core/Src/main.c:150:6:SystemClock_Config	4
-../Core/Src/main.c:207:6:Error_Handler	1
+../Core/Src/main.c:151:6:SystemClock_Config	4
+../Core/Src/main.c:208:6:Error_Handler	1
