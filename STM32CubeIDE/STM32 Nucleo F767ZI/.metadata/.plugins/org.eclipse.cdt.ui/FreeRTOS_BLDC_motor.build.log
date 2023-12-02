@@ -1,5 +1,5 @@
-17:20:16 **** Incremental Build of configuration Debug for project FreeRTOS_BLDC_motor ****
-make -j8 all 
+23:30:58 **** Incremental Build of configuration Debug for project FreeRTOS_BLDC_motor ****
+make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "FreeRTOS_BLDC_motor.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\Projects\GitHub\S-car-lett-A1-Firmware\STM32CubeIDE\STM32 Nucleo F767ZI\FreeRTOS_BLDC_motor\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FreeRTOS_BLDC_motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: FreeRTOS_BLDC_motor.elf
@@ -7,11 +7,11 @@ Finished building target: FreeRTOS_BLDC_motor.elf
 arm-none-eabi-size   FreeRTOS_BLDC_motor.elf 
 arm-none-eabi-objdump -h -S  FreeRTOS_BLDC_motor.elf  > "FreeRTOS_BLDC_motor.list"
    text	   data	    bss	    dec	    hex	filename
-  13812	     20	   1820	  15652	   3d24	FreeRTOS_BLDC_motor.elf
+  13820	     20	   1820	  15660	   3d2c	FreeRTOS_BLDC_motor.elf
 Finished building: default.size.stdout
  
 Finished building: FreeRTOS_BLDC_motor.list
  
 
-17:20:17 Build Finished. 0 errors, 0 warnings. (took 1s.87ms)
+23:30:59 Build Finished. 0 errors, 0 warnings. (took 753ms)
 

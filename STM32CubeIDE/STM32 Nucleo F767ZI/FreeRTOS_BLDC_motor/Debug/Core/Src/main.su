@@ -1,5 +1,5 @@
 ../Core/Src/main.c:63:6:map	24	static
 ../Core/Src/main.c:68:6:HAL_ADC_ConvCpltCallback	16	static
 ../Core/Src/main.c:82:5:main	16	static
-../Core/Src/main.c:151:6:SystemClock_Config	88	static
-../Core/Src/main.c:208:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.c:152:6:SystemClock_Config	88	static
+../Core/Src/main.c:209:6:Error_Handler	4	static,ignoring_inline_asm

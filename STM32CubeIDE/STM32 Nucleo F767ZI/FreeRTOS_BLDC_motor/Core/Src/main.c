@@ -125,6 +125,7 @@ int main(void)
   while (1)
   {
 	  ADC_Converted = map(ADC_Data, 0, 4095, 50, 100);
+	  TIM2->CCR4 = ADC_Converted;
 //	  TIM2->CCR4 = 55;
 //	  HAL_Delay(1000);
 //	  TIM2->CCR4 = 60;
