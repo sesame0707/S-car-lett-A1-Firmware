@@ -57,6 +57,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 float motorSpeed = 0.3;
 uint32_t var = 0.0;
+int speedState = 0;
 
 /* USER CODE END 0 */
 
@@ -101,22 +102,52 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  var = motorSpeed * (0xfff + 1) / 3.3;
-	  HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R, var);
-
 	  if(HAL_GPIO_ReadPin(API_ACCELERATE_GPIO_Port, API_ACCELERATE_Pin) == GPIO_PIN_SET) {
-		  if (motorSpeed < 3){
-			  motorSpeed += 0.5;
+		  if (speedState < 4){
+			  speedState ++;
 		  }
 		  HAL_Delay(100);
 	  }
 
 	  if(HAL_GPIO_ReadPin(API_DECELERATE_GPIO_Port, API_DECELERATE_Pin) == GPIO_PIN_SET) {
-		  if (motorSpeed > 0.2){
-			  motorSpeed -= 0.5;
+		  if (speedState > -2){
+			  speedState --;
 		  }
 		  HAL_Delay(100);
 	  }
+
+	  switch(speedState) {
+	  case -2:
+		  motorSpeed = 0.5;
+		  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
+		  break;
+	  case -1:
+		  motorSpeed = 0.4;
+		  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
+		  break;
+	  case 0:
+		  motorSpeed = 0.0;
+		  break;
+	  case 1:
+		  motorSpeed = 0.4;
+		  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+		  break;
+	  case 2:
+		  motorSpeed = 0.5;
+		  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+		  break;
+	  case 3:
+		  motorSpeed = 0.6;
+		  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+		  break;
+	  case 4:
+		  motorSpeed = 0.7;
+		  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+		  break;
+	  }
+
+	  var = motorSpeed * (0xfff + 1) / 3.3;
+	  HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R, var);
   }
   /* USER CODE END 3 */
 }
