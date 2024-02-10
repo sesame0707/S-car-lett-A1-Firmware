@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "ws281x.h"
 
 /* USER CODE END Includes */
 
@@ -58,6 +59,7 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+ws281x_t pixel;
 
 /* USER CODE END 0 */
 

@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "ws281x.h"
 
 /* USER CODE END Includes */
 
@@ -45,6 +46,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+extern ws281x_t pixel;
+extern SPI_HandleTypeDef hspi1;
 
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
@@ -139,10 +142,15 @@ void StartDefaultTask(void *argument)
 * @param argument: Not used
 * @retval None
 */
+// 7 * 3 * 35 = 735 bytes heap usage
+
 /* USER CODE END Header_StartLEDStripeTask */
 void StartLEDStripeTask(void *argument)
 {
   /* USER CODE BEGIN StartLEDStripeTask */
+	ws281x_init(&pixel, &hspi1, 21, ws281x_order_grb);
+	ws281x_test_slow(&pixel);
+
   /* Infinite loop */
   for(;;)
   {
