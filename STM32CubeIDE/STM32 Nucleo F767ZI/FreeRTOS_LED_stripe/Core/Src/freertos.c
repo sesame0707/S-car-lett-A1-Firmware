@@ -149,7 +149,8 @@ void StartLEDStripeTask(void *argument)
 {
   /* USER CODE BEGIN StartLEDStripeTask */
 	ws281x_init(&pixel, &hspi1, 21, ws281x_order_grb);
-	ws281x_test_slow(&pixel);
+//	ws281x_test_slow(&pixel);
+	ws281x_test_fast(&pixel);
 
   /* Infinite loop */
   for(;;)
