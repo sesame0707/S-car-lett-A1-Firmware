@@ -87,12 +87,12 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_7;
+    GPIO_InitStruct.Pin = LEDStripes_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
-    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+    HAL_GPIO_Init(LEDStripes_GPIO_Port, &GPIO_InitStruct);
 
     /* SPI1 DMA Init */
     /* SPI1_TX Init */
@@ -136,7 +136,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_5);
 
-    HAL_GPIO_DeInit(GPIOD, GPIO_PIN_7);
+    HAL_GPIO_DeInit(LEDStripes_GPIO_Port, LEDStripes_Pin);
 
     /* SPI1 DMA DeInit */
     HAL_DMA_DeInit(spiHandle->hdmatx);

@@ -67,6 +67,8 @@ void Error_Handler(void);
 #define RMII_REF_CLK_GPIO_Port GPIOA
 #define RMII_MDIO_Pin GPIO_PIN_2
 #define RMII_MDIO_GPIO_Port GPIOA
+#define BLDCMotorStep_Pin GPIO_PIN_4
+#define BLDCMotorStep_GPIO_Port GPIOA
 #define RMII_CRS_DV_Pin GPIO_PIN_7
 #define RMII_CRS_DV_GPIO_Port GPIOA
 #define RMII_RXD0_Pin GPIO_PIN_4
@@ -83,10 +85,18 @@ void Error_Handler(void);
 #define STLK_RX_GPIO_Port GPIOD
 #define STLK_TX_Pin GPIO_PIN_9
 #define STLK_TX_GPIO_Port GPIOD
+#define StepperMotorStep_Pin GPIO_PIN_14
+#define StepperMotorStep_GPIO_Port GPIOD
+#define StepperMotorDir_Pin GPIO_PIN_15
+#define StepperMotorDir_GPIO_Port GPIOD
 #define USB_PowerSwitchOn_Pin GPIO_PIN_6
 #define USB_PowerSwitchOn_GPIO_Port GPIOG
 #define USB_OverCurrent_Pin GPIO_PIN_7
 #define USB_OverCurrent_GPIO_Port GPIOG
+#define DrivingLights_Pin GPIO_PIN_8
+#define DrivingLights_GPIO_Port GPIOC
+#define LeftBlinkers_Pin GPIO_PIN_9
+#define LeftBlinkers_GPIO_Port GPIOC
 #define USB_SOF_Pin GPIO_PIN_8
 #define USB_SOF_GPIO_Port GPIOA
 #define USB_VBUS_Pin GPIO_PIN_9
@@ -101,14 +111,32 @@ void Error_Handler(void);
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
+#define RightBlinkers_Pin GPIO_PIN_10
+#define RightBlinkers_GPIO_Port GPIOC
+#define BrakeLights_Pin GPIO_PIN_11
+#define BrakeLights_GPIO_Port GPIOC
+#define WithdrawLights_Pin GPIO_PIN_12
+#define WithdrawLights_GPIO_Port GPIOC
+#define RPiPicoW_TX_Pin GPIO_PIN_0
+#define RPiPicoW_TX_GPIO_Port GPIOD
+#define RPiPicoW_RX_Pin GPIO_PIN_1
+#define RPiPicoW_RX_GPIO_Port GPIOD
+#define LEDStripes_Pin GPIO_PIN_7
+#define LEDStripes_GPIO_Port GPIOD
 #define RMII_TX_EN_Pin GPIO_PIN_11
 #define RMII_TX_EN_GPIO_Port GPIOG
 #define RMII_TXD0_Pin GPIO_PIN_13
 #define RMII_TXD0_GPIO_Port GPIOG
 #define SW0_Pin GPIO_PIN_3
 #define SW0_GPIO_Port GPIOB
+#define BLDCMotorDir_Pin GPIO_PIN_4
+#define BLDCMotorDir_GPIO_Port GPIOB
 #define LD2_Pin GPIO_PIN_7
 #define LD2_GPIO_Port GPIOB
+#define OLED_SCL_Pin GPIO_PIN_8
+#define OLED_SCL_GPIO_Port GPIOB
+#define OLED_SDA_Pin GPIO_PIN_9
+#define OLED_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

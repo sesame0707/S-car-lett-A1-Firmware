@@ -78,10 +78,10 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* dacHandle)
     /**DAC GPIO Configuration
     PA4     ------> DAC_OUT1
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_4;
+    GPIO_InitStruct.Pin = BLDCMotorStep_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    HAL_GPIO_Init(BLDCMotorStep_GPIO_Port, &GPIO_InitStruct);
 
     /* DAC interrupt Init */
     HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 5, 0);
@@ -106,7 +106,7 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* dacHandle)
     /**DAC GPIO Configuration
     PA4     ------> DAC_OUT1
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_4);
+    HAL_GPIO_DeInit(BLDCMotorStep_GPIO_Port, BLDCMotorStep_Pin);
 
     /* DAC interrupt Deinit */
     HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
