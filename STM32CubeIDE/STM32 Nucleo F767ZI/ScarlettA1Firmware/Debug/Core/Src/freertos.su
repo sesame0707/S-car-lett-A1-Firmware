@@ -1,0 +1,15 @@
+../Core/Src/freertos.c:186:6:MX_FREERTOS_Init	8	static
+../Core/Src/freertos.c:267:6:StartOLEDTask	24	static
+../Core/Src/freertos.c:306:6:StartDispatcherTask	16	static
+../Core/Src/freertos.c:362:6:StartStopTask	16	static
+../Core/Src/freertos.c:380:6:StartDrivingLightsTask	16	static
+../Core/Src/freertos.c:398:6:StartLEDStripeTask	16	static
+../Core/Src/freertos.c:416:6:StartLeftBlinkersTask	16	static
+../Core/Src/freertos.c:434:6:StartRightBlinkersTask	16	static
+../Core/Src/freertos.c:452:6:StartParkLeftTask	16	static
+../Core/Src/freertos.c:470:6:StartParkRightTask	16	static
+../Core/Src/freertos.c:488:6:StartAccelerateTask	16	static
+../Core/Src/freertos.c:506:6:StartDecelerateTask	16	static
+../Core/Src/freertos.c:524:6:StartTurnLeftTask	16	static
+../Core/Src/freertos.c:542:6:StartTurnRightTask	16	static
+../Core/Src/freertos.c:560:6:StartConnectionTask	16	static

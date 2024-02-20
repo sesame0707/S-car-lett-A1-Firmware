@@ -62,7 +62,8 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+extern uint8_t rx_buffer[];
+extern osThreadId_t DispatcherTaskHandle;
 /* USER CODE END 0 */
 
 /**
@@ -100,7 +101,7 @@ int main(void)
   MX_TIM4_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_UART_Receive_IT(&huart4, rx_buffer, 16);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -176,7 +177,10 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart4x) {
+	portYIELD_FROM_ISR(xTaskResumeFromISR(DispatcherTaskHandle));
+	HAL_UART_Receive_IT(&huart4, rx_buffer, 16);					// Used for "opening" ST MCU for future interrupts on RX
+}
 /* USER CODE END 4 */
 
 /**
