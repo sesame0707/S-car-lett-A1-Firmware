@@ -55,7 +55,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-extern uint8_t rx_buffer[];
+
 /* USER CODE END Variables */
 /* Definitions for OLEDTask */
 osThreadId_t OLEDTaskHandle;
@@ -311,7 +311,7 @@ void StartDispatcherTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  switch(rx_buffer[0]) {
+	  switch(RxBuffer[0]) {
 		case 0x1:		// Stop vehicle.
 			vTaskResume(StopTaskHandle);
 			break;
@@ -346,7 +346,8 @@ void StartDispatcherTask(void *argument)
 			vTaskResume(TurnRightTaskHandle);
 			break;
 		default:		// Acknowledge connection.
-			vTaskResume(ConnectionTaskHandle);
+//			vTaskResume(ConnectionTaskHandle);
+			vTaskResume(DrivingLightsTaHandle);
 		}
   }
   /* USER CODE END StartDispatcherTask */
@@ -365,7 +366,7 @@ void StartStopTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartStopTask */
 }
@@ -383,7 +384,8 @@ void StartDrivingLightsTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
+	  HAL_GPIO_TogglePin(DrivingLights_GPIO_Port, DrivingLights_Pin);
   }
   /* USER CODE END StartDrivingLightsTask */
 }
@@ -401,7 +403,7 @@ void StartLEDStripeTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartLEDStripeTask */
 }
@@ -419,7 +421,12 @@ void StartLeftBlinkersTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
+	  for(int i = 0; i < 6; i ++)
+	  {
+		  HAL_GPIO_TogglePin(LeftBlinkers_GPIO_Port, LeftBlinkers_Pin);
+		  osDelay(400);
+	  }
   }
   /* USER CODE END StartLeftBlinkersTask */
 }
@@ -437,7 +444,12 @@ void StartRightBlinkersTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
+	  for(int i = 0; i < 6; i ++)
+	  {
+		  HAL_GPIO_TogglePin(RightBlinkers_GPIO_Port, RightBlinkers_Pin);
+		  osDelay(400);
+	  }
   }
   /* USER CODE END StartRightBlinkersTask */
 }
@@ -455,7 +467,7 @@ void StartParkLeftTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartParkLeftTask */
 }
@@ -473,7 +485,7 @@ void StartParkRightTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartParkRightTask */
 }
@@ -491,7 +503,7 @@ void StartAccelerateTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartAccelerateTask */
 }
@@ -509,7 +521,10 @@ void StartDecelerateTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
+	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
+	  osDelay(1000);
+	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
   }
   /* USER CODE END StartDecelerateTask */
 }
@@ -527,7 +542,7 @@ void StartTurnLeftTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartTurnLeftTask */
 }
@@ -545,7 +560,7 @@ void StartTurnRightTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartTurnRightTask */
 }
@@ -563,7 +578,7 @@ void StartConnectionTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartConnectionTask */
 }

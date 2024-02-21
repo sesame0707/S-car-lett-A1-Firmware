@@ -10,7 +10,7 @@
 
 /* OLED */
 enum Header {
-	BOOTINGUP = 1,
+	BOOTING_UP = 1,
 	DISCONNECTED = 2,
 	CONNECTED = 3
 };
@@ -24,9 +24,9 @@ enum Body {
 enum StripesEffect {
 	DEFAULT = 1,
 	STOP = 2,
-	PARKSEARCHING = 3,
-	PARKFOUND = 4,
-	PARKNOTFOUND = 5
+	PARK_SEARCHING = 3,
+	PARK_FOUND = 4,
+	PARK_NOT_FOUND = 5
 };
 
 /* BLDC motor */
@@ -38,6 +38,6 @@ int sliderLeftRightPreviousValue = 0;
 int sliderLeftRightCurrentValue = 0;
 
 /* UART */
-uint8_t rx_buffer[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+uint8_t RxBuffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 #endif /* INC_COMMONVARIABLES_H_ */

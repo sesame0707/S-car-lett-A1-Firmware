@@ -62,7 +62,7 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-extern uint8_t rx_buffer[];
+extern uint8_t RxBuffer[];
 extern osThreadId_t DispatcherTaskHandle;
 /* USER CODE END 0 */
 
@@ -99,9 +99,9 @@ int main(void)
   MX_DAC_Init();
   MX_I2C1_Init();
   MX_TIM4_Init();
-  MX_UART4_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart4, rx_buffer, 16);
+  HAL_UART_Receive_IT(&huart6, RxBuffer, 1);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -141,10 +141,10 @@ void SystemClock_Config(void)
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 13;
+  RCC_OscInitStruct.PLL.PLLM = 4;
   RCC_OscInitStruct.PLL.PLLN = 216;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
@@ -177,9 +177,9 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart4x) {
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart6x) {
 	portYIELD_FROM_ISR(xTaskResumeFromISR(DispatcherTaskHandle));
-	HAL_UART_Receive_IT(&huart4, rx_buffer, 16);					// Used for "opening" ST MCU for future interrupts on RX
+	HAL_UART_Receive_IT(&huart6, RxBuffer, 1);					// Used for "opening" ST MCU for future interrupts on RX
 }
 /* USER CODE END 4 */
 
