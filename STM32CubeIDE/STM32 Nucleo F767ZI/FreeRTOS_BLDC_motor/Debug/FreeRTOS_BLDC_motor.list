@@ -1098,13 +1098,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  ADC_Converted = map(ADC_Data, 0, 4095, 0, 50);
+	  ADC_Converted = map(ADC_Data, 0, 4095, 50, 100);
  800099c:	4b0a      	ldr	r3, [pc, #40]	; (80009c8 <main+0x5c>)
  800099e:	881b      	ldrh	r3, [r3, #0]
  80009a0:	4618      	mov	r0, r3
- 80009a2:	2332      	movs	r3, #50	; 0x32
+ 80009a2:	2364      	movs	r3, #100	; 0x64
  80009a4:	9300      	str	r3, [sp, #0]
- 80009a6:	2300      	movs	r3, #0
+ 80009a6:	2332      	movs	r3, #50	; 0x32
  80009a8:	f640 72ff 	movw	r2, #4095	; 0xfff
  80009ac:	2100      	movs	r1, #0
  80009ae:	f7ff ffb5 	bl	800091c <map>
@@ -1116,7 +1116,7 @@ int main(void)
  80009ba:	681a      	ldr	r2, [r3, #0]
  80009bc:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
  80009c0:	641a      	str	r2, [r3, #64]	; 0x40
-	  ADC_Converted = map(ADC_Data, 0, 4095, 0, 50);
+	  ADC_Converted = map(ADC_Data, 0, 4095, 50, 100);
  80009c2:	e7eb      	b.n	800099c <main+0x30>
  80009c4:	200000d8 	.word	0x200000d8
  80009c8:	200000d0 	.word	0x200000d0

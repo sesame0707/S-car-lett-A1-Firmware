@@ -10,7 +10,7 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.settings/
+# .settings/
 .loadpath
 .recommenders
 
@@ -18,13 +18,13 @@ local.properties
 .externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
-*.launch
+# *.launch
 
 # PyDev specific (Python IDE for Eclipse)
 *.pydevproject
 
 # CDT-specific (C/C++ Development Tooling)
-.cproject
+# .cproject
 
 # CDT- autotools
 .autotools
