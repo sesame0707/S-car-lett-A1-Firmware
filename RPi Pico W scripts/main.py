@@ -5,11 +5,11 @@ import socket
 from machine import Pin,UART
 
 
-def web_page():
-  html = """<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-            <body><h1>Hello World</h1></body></html>
-         """
-  return html
+# def web_page():
+#   html = """<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+#             <body><h1>Hello World</h1></body></html>
+#          """
+#   return html
 
 # if you do not see the network you may have to power cycle
 # unplug your pico w for 10 seconds and plug it in again
@@ -46,14 +46,14 @@ def ap_mode(ssid, password):
 
     while True:
       conn, addr = s.accept()
-      print('Got a connection from %s' % str(addr))
+      # print('Got a connection from %s' % str(addr))
       request = conn.recv(1024)
-      print('Content = %s' % str(request))
+      # print('Content = %s' % str(request))
       
       uart.write(request)
       
-      response = web_page()
-      conn.send(response)
+      # response = web_page()
+      # conn.send(response)
       conn.close()
 
 uart = UART(1, baudrate=115200, tx=Pin(4), rx=Pin(5))   #UART1, GP4 & GP5 pins
