@@ -312,42 +312,41 @@ void StartDispatcherTask(void *argument)
 	  vTaskSuspend(NULL);
 
 	  switch(RxBuffer[0]) {
-		case 0x1:		// Stop vehicle.
+		case 0x01:		// Stop vehicle.
 			vTaskResume(StopTaskHandle);
 			break;
-		case 0x2:		// Toggle driving lights.
+		case 0x02:		// Toggle driving lights.
 			vTaskResume(DrivingLightsTaHandle);
 			break;
-		case 0x3:		// Toggle RGB stripe.
+		case 0x03:		// Toggle RGB stripe.
 			vTaskResume(LEDStripeTaskHandle);
 			break;
-		case 0x4:		// Turn left blinkers on.
+		case 0x04:		// Turn left blinkers on.
 			vTaskResume(LeftBlinkersTasHandle);
 			break;
-		case 0x5:		// Turn right blinkers on.
+		case 0x05:		// Turn right blinkers on.
 			vTaskResume(RightBlinkersTaHandle);
 			break;
-		case 0x6:		// Toggle parking to the left.
+		case 0x06:		// Toggle parking to the left.
 			vTaskResume(ParkLeftTaskHandle);
 			break;
-		case 0x7:		// Toggle parking to the right.
+		case 0x07:		// Toggle parking to the right.
 			vTaskResume(ParkRightTaskHandle);
 			break;
-		case 0x11:		// Accelerate.
+		case 0x0B:		// Accelerate.
 			vTaskResume(AccelerateTaskHandle);
 			break;
-		case 0x12:		// Decelerate.
+		case 0x0C:		// Decelerate.
 			vTaskResume(DecelerateTaskHandle);
 			break;
-		case 0x13:		// Turn left.
+		case 0x0D:		// Turn left.
 			vTaskResume(TurnLeftTaskHandle);
 			break;
-		case 0x14:		// Turn right.
+		case 0x0E:		// Turn right.
 			vTaskResume(TurnRightTaskHandle);
 			break;
 		default:		// Acknowledge connection.
-//			vTaskResume(ConnectionTaskHandle);
-			vTaskResume(DrivingLightsTaHandle);
+			vTaskResume(ConnectionTaskHandle);
 		}
   }
   /* USER CODE END StartDispatcherTask */
