@@ -27,11 +27,14 @@
 /* USER CODE BEGIN Includes */
 /* System libraries */
 #include <string.h>
+#include <stdio.h>
 
 /* External libraries */
 #include "ssd1306.h"
 #include "ssd1306_fonts.h"
 #include "ssd1306_tests.h"
+
+#include "ws2812b.h"
 
 /* Own headers */
 #include "commonStrings.h"
@@ -45,7 +48,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+/* For LEDStripes */
+#define PACKING WS2812B_PACKING_SINGLE
+#define PREFIX_LEN 1
+#define SUFFIX_LEN 4
+#define LED_COUNT 7
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,7 +62,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+extern SPI_HandleTypeDef hspi1;
 /* USER CODE END Variables */
 /* Definitions for OLEDTask */
 osThreadId_t OLEDTaskHandle;
@@ -85,10 +92,10 @@ const osThreadAttr_t DrivingLightsTa_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for LEDStripeTask */
-osThreadId_t LEDStripeTaskHandle;
-const osThreadAttr_t LEDStripeTask_attributes = {
-  .name = "LEDStripeTask",
+/* Definitions for LEDStripesTask */
+osThreadId_t LEDStripesTaskHandle;
+const osThreadAttr_t LEDStripesTask_attributes = {
+  .name = "LEDStripesTask",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
@@ -165,7 +172,7 @@ void StartOLEDTask(void *argument);
 void StartDispatcherTask(void *argument);
 void StartStopTask(void *argument);
 void StartDrivingLightsTask(void *argument);
-void StartLEDStripeTask(void *argument);
+void StartLEDStripesTask(void *argument);
 void StartLeftBlinkersTask(void *argument);
 void StartRightBlinkersTask(void *argument);
 void StartParkLeftTask(void *argument);
@@ -217,8 +224,8 @@ void MX_FREERTOS_Init(void) {
   /* creation of DrivingLightsTa */
   DrivingLightsTaHandle = osThreadNew(StartDrivingLightsTask, NULL, &DrivingLightsTa_attributes);
 
-  /* creation of LEDStripeTask */
-  LEDStripeTaskHandle = osThreadNew(StartLEDStripeTask, NULL, &LEDStripeTask_attributes);
+  /* creation of LEDStripesTask */
+  LEDStripesTaskHandle = osThreadNew(StartLEDStripesTask, NULL, &LEDStripesTask_attributes);
 
   /* creation of LeftBlinkersTas */
   LeftBlinkersTasHandle = osThreadNew(StartLeftBlinkersTask, NULL, &LeftBlinkersTas_attributes);
@@ -319,7 +326,7 @@ void StartDispatcherTask(void *argument)
 			vTaskResume(DrivingLightsTaHandle);
 			break;
 		case 0x03:		// Toggle RGB stripe.
-			vTaskResume(LEDStripeTaskHandle);
+			vTaskResume(LEDStripesTaskHandle);
 			break;
 		case 0x04:		// Turn left blinkers on.
 			vTaskResume(LeftBlinkersTasHandle);
@@ -389,22 +396,66 @@ void StartDrivingLightsTask(void *argument)
   /* USER CODE END StartDrivingLightsTask */
 }
 
-/* USER CODE BEGIN Header_StartLEDStripeTask */
+/* USER CODE BEGIN Header_StartLEDStripesTask */
 /**
-* @brief Function implementing the LEDStripeTask thread.
+* @brief Function implementing the LEDStripesTask thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartLEDStripeTask */
-void StartLEDStripeTask(void *argument)
+/* USER CODE END Header_StartLEDStripesTask */
+void StartLEDStripesTask(void *argument)
 {
-  /* USER CODE BEGIN StartLEDStripeTask */
+  /* USER CODE BEGIN StartLEDStripesTask */
+	// Transmit 4 empty bytes to ensure SDO is low.
+	uint8_t d[4] = {0};
+	HAL_SPI_Transmit(&hspi1, d, 4, 100);
+
+	// Create handle and configure
+	ws2812b_handle_t hws2812b;
+
+	hws2812b.config.packing = PACKING; // See macro above
+	hws2812b.config.pulse_len_1 = WS2812B_PULSE_LEN_6b;
+	hws2812b.config.pulse_len_0 = WS2812B_PULSE_LEN_2b;
+	hws2812b.config.first_bit_0 = WS2812B_FIRST_BIT_0_ENABLED;
+	hws2812b.config.prefix_len = PREFIX_LEN; // See macro above
+	hws2812b.config.suffix_len = SUFFIX_LEN; // See macro above
+	hws2812b.config.spi_bit_order = WS2812B_MSB_FIRST;
+
+	// Create array of LEDs & set LED color
+	ws2812b_led_t leds[LED_COUNT];
+
+	for(int i=0;i<LED_COUNT;i++) {
+	  leds[i].red = 0x40;
+	  leds[i].green = 0x00;
+	  leds[i].blue = 0x00;
+	}
+
+	// Add LEDs and count to handle
+	hws2812b.led_count = LED_COUNT;
+	hws2812b.leds = leds;
+
+	// Initialize the driver
+	if(ws2812b_init(&hws2812b)){
+	  printf("Invalid ws2812b config! (%s)\r\n",ws2812b_error_msg);
+	  while(1) {;}
+	}
+
+	// Create buffer
+	uint8_t dma_buf[ws2812b_required_buffer_len(&hws2812b)];
+
   /* Infinite loop */
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  // Fill buffer
+	  ws2812b_fill_buffer(&hws2812b, dma_buf);
+
+	  // Transmit
+	  HAL_SPI_Transmit_DMA(&hspi1, dma_buf, ws2812b_required_buffer_len(&hws2812b));
+	  HAL_Delay(10); // 10ms delay
   }
-  /* USER CODE END StartLEDStripeTask */
+  /* USER CODE END StartLEDStripesTask */
 }
 
 /* USER CODE BEGIN Header_StartLeftBlinkersTask */
@@ -522,7 +573,7 @@ void StartDecelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
-	  osDelay(1000);
+	  osDelay(500);
 	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
   }
   /* USER CODE END StartDecelerateTask */

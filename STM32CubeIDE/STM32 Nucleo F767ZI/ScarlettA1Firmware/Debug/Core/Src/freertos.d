@@ -46,8 +46,8 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/ssd1306.h ../Core/Inc/ssd1306_conf.h \
  ../Core/Inc/ssd1306_fonts.h ../Core/Inc/ssd1306_fonts.h \
- ../Core/Inc/ssd1306_tests.h ../Core/Inc/commonStrings.h \
- ../Core/Inc/commonVariables.h
+ ../Core/Inc/ssd1306_tests.h ../Core/Inc/ws2812b.h \
+ ../Core/Inc/commonStrings.h ../Core/Inc/commonVariables.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -99,5 +99,6 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Core/Inc/ssd1306_fonts.h:
 ../Core/Inc/ssd1306_fonts.h:
 ../Core/Inc/ssd1306_tests.h:
+../Core/Inc/ws2812b.h:
 ../Core/Inc/commonStrings.h:
 ../Core/Inc/commonVariables.h:
