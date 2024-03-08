@@ -8,8 +8,6 @@
 #ifndef INC_COMMONSTRINGS_H_
 #define INC_COMMONSTRINGS_H_
 
-#include "main.h"
-
 /* Firmware information */
 const int versionCode = 0;
 const char versionName[] = "1.x";

@@ -48,7 +48,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+/* For LEDStripes */
+#define PACKING WS2812B_PACKING_SINGLE
+#define PREFIX_LEN 1
+#define SUFFIX_LEN 4
+#define LED_COUNT 7
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -402,10 +406,7 @@ void StartDrivingLightsTask(void *argument)
 void StartLEDStripesTask(void *argument)
 {
   /* USER CODE BEGIN StartLEDStripesTask */
-	// Set StripesEffect enum
-	enum StripesEffect stripesEffect = NONE;
-
-	// Transmit 4 empty bytes to ensure SDO is low
+	// Transmit 4 empty bytes to ensure SDO is low.
 	uint8_t d[4] = {0};
 	HAL_SPI_Transmit(&hspi1, d, 4, 100);
 
@@ -422,12 +423,11 @@ void StartLEDStripesTask(void *argument)
 
 	// Create array of LEDs & set LED color
 	ws2812b_led_t leds[LED_COUNT];
-	struct DesiredStripesColor desiredStripesColor;
-	setStripesEffect(stripesEffect, &desiredStripesColor);
-	for(int i=0; i<LED_COUNT; i++) {
-	  leds[i].red = desiredStripesColor.red;
-	  leds[i].green = desiredStripesColor.green;
-	  leds[i].blue = desiredStripesColor.blue;
+
+	for(int i=0;i<LED_COUNT;i++) {
+	  leds[i].red = 0x40;
+	  leds[i].green = 0x00;
+	  leds[i].blue = 0x00;
 	}
 
 	// Add LEDs and count to handle

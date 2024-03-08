@@ -8,14 +8,6 @@
 #ifndef INC_COMMONVARIABLES_H_
 #define INC_COMMONVARIABLES_H_
 
-/* For LED stripes */
-#define PACKING WS2812B_PACKING_SINGLE
-#define PREFIX_LEN 1
-#define SUFFIX_LEN 4
-#define LED_COUNT 7
-
-#include "main.h"
-
 /* OLED */
 enum Header {
 	BOOTING_UP = 1,
@@ -30,21 +22,12 @@ enum Body {
 
 /* LED stripes */
 enum StripesEffect {
-	NONE = 1,
-	DEFAULT = 2,
-	STOP = 3,
-	PARK_SEARCHING = 4,
-	PARK_FOUND = 5,
-	PARK_NOT_FOUND = 6
+	DEFAULT = 1,
+	STOP = 2,
+	PARK_SEARCHING = 3,
+	PARK_FOUND = 4,
+	PARK_NOT_FOUND = 5
 };
-
-struct DesiredStripesColor {
-	uint8_t red;
-	uint8_t green;
-	uint8_t blue;
-};
-
-void setStripesEffect(enum StripesEffect, struct DesiredStripesColor *);
 
 /* BLDC motor */
 int sliderAccelerateDeceleratePreviousValue = 0;
