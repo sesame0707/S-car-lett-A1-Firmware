@@ -38,13 +38,48 @@ enum StripesEffect {
 	PARK_NOT_FOUND = 6
 };
 
+enum StripesEffect stripesEffect = NONE;
+
 struct DesiredStripesColor {
 	uint8_t red;
 	uint8_t green;
 	uint8_t blue;
 };
 
-void setStripesEffect(enum StripesEffect, struct DesiredStripesColor *);
+void setStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripesColor *desiredStripesColor) {
+	switch (stripesEffect) {
+	case 1:
+		desiredStripesColor->red = 0x00;
+		desiredStripesColor->green = 0x00;
+		desiredStripesColor->blue = 0x00;
+		break;
+	case 2:
+		desiredStripesColor->red = 0x40;
+		desiredStripesColor->green = 0x20;
+		desiredStripesColor->blue = 0x00;
+		break;
+	case 3:
+		desiredStripesColor->red = 0x40;
+		desiredStripesColor->green = 0x40;
+		desiredStripesColor->blue = 0x40;
+		break;
+	case 4:
+		desiredStripesColor->red = 0x00;
+		desiredStripesColor->green = 0x00;
+		desiredStripesColor->blue = 0x40;
+		break;
+	case 5:
+		desiredStripesColor->red = 0x00;
+		desiredStripesColor->green = 0x40;
+		desiredStripesColor->blue = 0x00;
+		break;
+	case 6:
+		desiredStripesColor->red = 0x40;
+		desiredStripesColor->green = 0x00;
+		desiredStripesColor->blue = 0x00;
+		break;
+	}
+}
 
 /* BLDC motor */
 int sliderAccelerateDeceleratePreviousValue = 0;

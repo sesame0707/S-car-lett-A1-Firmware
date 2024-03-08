@@ -59,6 +59,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 extern SPI_HandleTypeDef hspi1;
+extern enum StripesEffect stripesEffect;
 /* USER CODE END Variables */
 /* Definitions for OLEDTask */
 osThreadId_t OLEDTaskHandle;
@@ -402,8 +403,10 @@ void StartDrivingLightsTask(void *argument)
 void StartLEDStripesTask(void *argument)
 {
   /* USER CODE BEGIN StartLEDStripesTask */
+	bool isOn = false;
+
 	// Set StripesEffect enum
-	enum StripesEffect stripesEffect = NONE;
+	stripesEffect = NONE;
 
 	// Transmit 4 empty bytes to ensure SDO is low
 	uint8_t d[4] = {0};
@@ -447,6 +450,26 @@ void StartLEDStripesTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  // Toggle effect
+	  if (isOn == false) {
+		  isOn = !isOn;
+		  stripesEffect = DEFAULT;
+	  } else {
+		  isOn = !isOn;
+		  stripesEffect = NONE;
+	  }
+
+	  // Update LED color
+	  setStripesEffect(stripesEffect, &desiredStripesColor);
+	  for(int i=0; i<LED_COUNT; i++) {
+		  leds[i].red = desiredStripesColor.red;
+		  leds[i].green = desiredStripesColor.green;
+		  leds[i].blue = desiredStripesColor.blue;
+	  }
+
+	  // Add LEDs to handle
+	  hws2812b.leds = leds;
 
 	  // Fill buffer
 	  ws2812b_fill_buffer(&hws2812b, dma_buf);
