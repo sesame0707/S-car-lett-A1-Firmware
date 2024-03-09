@@ -1,3 +1,6 @@
+"./Core/Src/commonFunctions.o"
+"./Core/Src/commonStrings.o"
+"./Core/Src/commonVariables.o"
 "./Core/Src/dac.o"
 "./Core/Src/dma.o"
 "./Core/Src/freertos.o"

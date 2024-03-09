@@ -37,8 +37,10 @@
 #include "ws2812b.h"
 
 /* Own headers */
+#include "firmwareConfig.h"
 #include "commonStrings.h"
 #include "commonVariables.h"
+#include "commonFunctions.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,6 +60,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+extern uint8_t RxBuffer[];
 extern SPI_HandleTypeDef hspi1;
 extern enum StripesEffect stripesEffect;
 /* USER CODE END Variables */

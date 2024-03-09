@@ -8,13 +8,7 @@
 #ifndef INC_COMMONVARIABLES_H_
 #define INC_COMMONVARIABLES_H_
 
-/* For LED stripes */
-#define PACKING WS2812B_PACKING_SINGLE
-#define PREFIX_LEN 1
-#define SUFFIX_LEN 4
-#define LED_COUNT 7
-
-#include "main.h"
+#include <stdint.h>
 
 /* OLED */
 enum Header {
@@ -38,7 +32,7 @@ enum StripesEffect {
 	PARK_NOT_FOUND = 6
 };
 
-enum StripesEffect stripesEffect = NONE;
+extern enum StripesEffect stripesEffect;
 
 struct DesiredStripesColor {
 	uint8_t red;
@@ -46,50 +40,15 @@ struct DesiredStripesColor {
 	uint8_t blue;
 };
 
-void setStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripesColor *desiredStripesColor) {
-	switch (stripesEffect) {
-	case 1:
-		desiredStripesColor->red = 0x00;
-		desiredStripesColor->green = 0x00;
-		desiredStripesColor->blue = 0x00;
-		break;
-	case 2:
-		desiredStripesColor->red = 0x40;
-		desiredStripesColor->green = 0x20;
-		desiredStripesColor->blue = 0x00;
-		break;
-	case 3:
-		desiredStripesColor->red = 0x40;
-		desiredStripesColor->green = 0x40;
-		desiredStripesColor->blue = 0x40;
-		break;
-	case 4:
-		desiredStripesColor->red = 0x00;
-		desiredStripesColor->green = 0x00;
-		desiredStripesColor->blue = 0x40;
-		break;
-	case 5:
-		desiredStripesColor->red = 0x00;
-		desiredStripesColor->green = 0x40;
-		desiredStripesColor->blue = 0x00;
-		break;
-	case 6:
-		desiredStripesColor->red = 0x40;
-		desiredStripesColor->green = 0x00;
-		desiredStripesColor->blue = 0x00;
-		break;
-	}
-}
-
 /* BLDC motor */
-int sliderAccelerateDeceleratePreviousValue = 0;
-int sliderAccelerateDecelerateCurrentValue = 0;
+extern int sliderAccelerateDeceleratePreviousValue;
+extern int sliderAccelerateDecelerateCurrentValue;
 
 /* Stepper motor */
-int sliderLeftRightPreviousValue = 0;
-int sliderLeftRightCurrentValue = 0;
+extern int sliderLeftRightPreviousValue;
+extern int sliderLeftRightCurrentValue;
 
 /* UART */
-uint8_t RxBuffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+extern uint8_t RxBuffer[];
 
 #endif /* INC_COMMONVARIABLES_H_ */
