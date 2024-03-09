@@ -49,7 +49,7 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Core/Inc/ssd1306_tests.h ../Core/Inc/ws2812b.h \
  ../Core/Inc/firmwareConfig.h ../Core/Inc/commonStrings.h \
  ../Core/Inc/commonVariables.h ../Core/Inc/commonFunctions.h \
- ../Core/Inc/commonVariables.h
+ ../Core/Inc/commonVariables.h ../Core/Inc/dac.h ../Core/Inc/main.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -107,3 +107,5 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Core/Inc/commonVariables.h:
 ../Core/Inc/commonFunctions.h:
 ../Core/Inc/commonVariables.h:
+../Core/Inc/dac.h:
+../Core/Inc/main.h:

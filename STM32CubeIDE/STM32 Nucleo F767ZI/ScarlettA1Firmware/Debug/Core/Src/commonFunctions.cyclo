@@ -1,1 +1,2 @@
-../Core/Src/commonFunctions.c:11:6:setStripesEffect	7
+../Core/Src/commonFunctions.c:11:6:setLEDStripesEffect	7
+../Core/Src/commonFunctions.c:47:6:setBLDCMotorSpeed	8

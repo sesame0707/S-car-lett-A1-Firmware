@@ -12,10 +12,14 @@ bool isConnected = true;
 
 /* LED stripes */
 enum StripesEffect stripesEffect = NONE;
+bool isOn = false;
 
 /* BLDC motor */
 int sliderAccelerateDeceleratePreviousValue = 0;
 int sliderAccelerateDecelerateCurrentValue = 0;
+bool isWithdrawing = false;
+float BLDCMotorSpeedVoltage = 0.0;
+uint32_t BLDCMotorSpeedValue = 0.0;
 
 /* Stepper motor */
 int sliderLeftRightPreviousValue = 0;

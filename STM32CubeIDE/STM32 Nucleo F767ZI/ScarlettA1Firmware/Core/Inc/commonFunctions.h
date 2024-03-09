@@ -9,8 +9,12 @@
 #define INC_COMMONFUNCTIONS_H_
 
 #include "commonVariables.h"
+#include "dac.h"
 
 /* LED stripes */
-void setStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripesColor *desiredStripesColor);
+void setLEDStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripesColor *desiredStripesColor);
+
+/* BLDC motor */
+void setBLDCMotorSpeed(void);
 
 #endif /* INC_COMMONFUNCTIONS_H_ */

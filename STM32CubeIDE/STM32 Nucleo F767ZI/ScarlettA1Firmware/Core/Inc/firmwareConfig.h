@@ -9,12 +9,15 @@
 #define INC_FIRMWARECONFIG_H_
 
 /* OLED */
-#define STARTUP_LEN 3000
+#define STARTUP_DURATION 3000
 
 /* LED stripes */
 #define PACKING WS2812B_PACKING_SINGLE
 #define PREFIX_LEN 1
 #define SUFFIX_LEN 4
 #define LED_COUNT 7
+
+/* Lights */
+#define BRAKE_LIGHTS_DURATION 500
 
 #endif /* INC_FIRMWARECONFIG_H_ */

@@ -36,6 +36,7 @@ enum StripesEffect {
 };
 
 extern enum StripesEffect stripesEffect;
+extern bool isOn;
 
 struct DesiredStripesColor {
 	uint8_t red;
@@ -46,6 +47,9 @@ struct DesiredStripesColor {
 /* BLDC motor */
 extern int sliderAccelerateDeceleratePreviousValue;
 extern int sliderAccelerateDecelerateCurrentValue;
+extern bool isWithdrawing;
+extern float BLDCMotorSpeedVoltage;
+extern uint32_t BLDCMotorSpeedValue;
 
 /* Stepper motor */
 extern int sliderLeftRightPreviousValue;

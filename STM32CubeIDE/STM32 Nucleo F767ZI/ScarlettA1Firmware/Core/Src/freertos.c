@@ -60,10 +60,22 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+/* UART */
 extern uint8_t RxBuffer[];
+
+/* OLED */
+extern bool isConnected;
+
+/* LED stripes */
 extern SPI_HandleTypeDef hspi1;
 extern enum StripesEffect stripesEffect;
-extern bool isConnected;
+extern bool isOn;
+
+/* BLDC motor */
+extern DAC_HandleTypeDef hdac;
+extern bool isWithdrawing;
+extern float BLDCMotorSpeedVoltage;
+extern uint32_t BLDCMotorSpeedValue;
 /* USER CODE END Variables */
 /* Definitions for OLEDTask */
 osThreadId_t OLEDTaskHandle;
@@ -163,6 +175,20 @@ const osThreadAttr_t ConnectionTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for BrakeLightsTask */
+osThreadId_t BrakeLightsTaskHandle;
+const osThreadAttr_t BrakeLightsTask_attributes = {
+  .name = "BrakeLightsTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for WithdrawLightsT */
+osThreadId_t WithdrawLightsTHandle;
+const osThreadAttr_t WithdrawLightsT_attributes = {
+  .name = "WithdrawLightsT",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -183,6 +209,8 @@ void StartDecelerateTask(void *argument);
 void StartTurnLeftTask(void *argument);
 void StartTurnRightTask(void *argument);
 void StartConnectionTask(void *argument);
+void StartBrakeLightsTask(void *argument);
+void StartWithdrawLightsTask(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -255,6 +283,12 @@ void MX_FREERTOS_Init(void) {
   /* creation of ConnectionTask */
   ConnectionTaskHandle = osThreadNew(StartConnectionTask, NULL, &ConnectionTask_attributes);
 
+  /* creation of BrakeLightsTask */
+  BrakeLightsTaskHandle = osThreadNew(StartBrakeLightsTask, NULL, &BrakeLightsTask_attributes);
+
+  /* creation of WithdrawLightsT */
+  WithdrawLightsTHandle = osThreadNew(StartWithdrawLightsTask, NULL, &WithdrawLightsT_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -298,7 +332,7 @@ void StartOLEDTask(void *argument)
 	y = 0;
 
 	// Delay
-	osDelay(STARTUP_LEN);
+	osDelay(STARTUP_DURATION);
 
   /* Infinite loop */
   for(;;)
@@ -440,8 +474,6 @@ void StartDrivingLightsTask(void *argument)
 void StartLEDStripesTask(void *argument)
 {
   /* USER CODE BEGIN StartLEDStripesTask */
-	bool isOn = false;
-
 	// Set StripesEffect enum
 	stripesEffect = NONE;
 
@@ -463,7 +495,7 @@ void StartLEDStripesTask(void *argument)
 	// Create array of LEDs & set LED color
 	ws2812b_led_t leds[LED_COUNT];
 	struct DesiredStripesColor desiredStripesColor;
-	setStripesEffect(stripesEffect, &desiredStripesColor);
+	setLEDStripesEffect(stripesEffect, &desiredStripesColor);
 	for(int i=0; i<LED_COUNT; i++) {
 	  leds[i].red = desiredStripesColor.red;
 	  leds[i].green = desiredStripesColor.green;
@@ -498,7 +530,7 @@ void StartLEDStripesTask(void *argument)
 	  }
 
 	  // Update LED color
-	  setStripesEffect(stripesEffect, &desiredStripesColor);
+	  setLEDStripesEffect(stripesEffect, &desiredStripesColor);
 	  for(int i=0; i<LED_COUNT; i++) {
 		  leds[i].red = desiredStripesColor.red;
 		  leds[i].green = desiredStripesColor.green;
@@ -610,10 +642,23 @@ void StartParkRightTask(void *argument)
 void StartAccelerateTask(void *argument)
 {
   /* USER CODE BEGIN StartAccelerateTask */
+	HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R, 0.0);
   /* Infinite loop */
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  if(sliderAccelerateDecelerateCurrentValue < 4) {
+		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
+		  sliderAccelerateDecelerateCurrentValue ++;
+	  }
+
+	  setBLDCMotorSpeed();
+
+	  if(sliderAccelerateDecelerateCurrentValue >= 0) {
+		  isWithdrawing = false;
+		  vTaskResume(WithdrawLightsTHandle);
+	  }
   }
   /* USER CODE END StartAccelerateTask */
 }
@@ -628,13 +673,25 @@ void StartAccelerateTask(void *argument)
 void StartDecelerateTask(void *argument)
 {
   /* USER CODE BEGIN StartDecelerateTask */
+	HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R, 0.0);
   /* Infinite loop */
   for(;;)
   {
 	  vTaskSuspend(NULL);
-	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
-	  osDelay(500);
-	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
+
+	  if (sliderAccelerateDecelerateCurrentValue > -2){
+		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
+		  sliderAccelerateDecelerateCurrentValue --;
+	  }
+
+	  setBLDCMotorSpeed();
+
+	  if(sliderAccelerateDecelerateCurrentValue >= 0) {
+		  vTaskResume(BrakeLightsTaskHandle);
+	  } else {
+		  isWithdrawing = true;
+		  vTaskResume(WithdrawLightsTHandle);
+	  }
   }
   /* USER CODE END StartDecelerateTask */
 }
@@ -691,6 +748,52 @@ void StartConnectionTask(void *argument)
 	  vTaskSuspend(NULL);
   }
   /* USER CODE END StartConnectionTask */
+}
+
+/* USER CODE BEGIN Header_StartBrakeLightsTask */
+/**
+* @brief Function implementing the BrakeLightsTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartBrakeLightsTask */
+void StartBrakeLightsTask(void *argument)
+{
+  /* USER CODE BEGIN StartBrakeLightsTask */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+
+	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
+	  osDelay(BRAKE_LIGHTS_DURATION);
+	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
+  }
+  /* USER CODE END StartBrakeLightsTask */
+}
+
+/* USER CODE BEGIN Header_StartWithdrawLightsTask */
+/**
+* @brief Function implementing the WithdrawLightsT thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartWithdrawLightsTask */
+void StartWithdrawLightsTask(void *argument)
+{
+  /* USER CODE BEGIN StartWithdrawLightsTask */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+
+	  if(isWithdrawing) {
+		  HAL_GPIO_WritePin(WithdrawLights_GPIO_Port, WithdrawLights_Pin, SET);
+	  } else {
+		  HAL_GPIO_WritePin(WithdrawLights_GPIO_Port, WithdrawLights_Pin, RESET);
+	  }
+  }
+  /* USER CODE END StartWithdrawLightsTask */
 }
 
 /* Private application code --------------------------------------------------*/

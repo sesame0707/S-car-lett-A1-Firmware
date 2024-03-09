@@ -102,6 +102,7 @@ int main(void)
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart6, RxBuffer, 1);
+  HAL_DAC_Start(&hdac, DAC1_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Init scheduler */
