@@ -8,7 +8,10 @@
 #ifndef INC_FIRMWARECONFIG_H_
 #define INC_FIRMWARECONFIG_H_
 
-/* For LED stripes */
+/* OLED */
+#define STARTUP_LEN 3000
+
+/* LED stripes */
 #define PACKING WS2812B_PACKING_SINGLE
 #define PREFIX_LEN 1
 #define SUFFIX_LEN 4

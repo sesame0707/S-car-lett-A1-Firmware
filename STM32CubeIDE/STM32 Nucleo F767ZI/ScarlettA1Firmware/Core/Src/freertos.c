@@ -63,6 +63,7 @@
 extern uint8_t RxBuffer[];
 extern SPI_HandleTypeDef hspi1;
 extern enum StripesEffect stripesEffect;
+extern bool isConnected;
 /* USER CODE END Variables */
 /* Definitions for OLEDTask */
 osThreadId_t OLEDTaskHandle;
@@ -282,19 +283,52 @@ void StartOLEDTask(void *argument)
 	uint8_t y = 0;
 	ssd1306_Fill(Black);
 
+	// Set header
+	ssd1306_SetCursor(2, y);
+	ssd1306_WriteString(headerBootingUp, Font_7x10, White);
+	y += 30;
+
+	// Set body
+	ssd1306_SetCursor(2, y);
+	ssd1306_WriteString(bodyVersion, Font_11x18, White);
+	y += 36;
+
+	// Show content
+	ssd1306_UpdateScreen();
+	y = 0;
+
+	// Delay
+	osDelay(STARTUP_LEN);
+
   /* Infinite loop */
   for(;;)
   {
-	  // Set header
-	  ssd1306_SetCursor(2, y);
-	  ssd1306_WriteString(headerBootingUp, Font_7x10, White);
-	  y += 30;
+	  // Clear screen
+	  ssd1306_Fill(Black);
 
-	  // Set body
-	  ssd1306_SetCursor(2, y);
-	  ssd1306_WriteString(bodyVersion, Font_11x18, White);
-	  y += 36;
+	  if(isConnected) {
+		  // Set header
+		  ssd1306_SetCursor(2, y);
+		  ssd1306_WriteString(headerConnected, Font_7x10, White);
+		  y += 30;
 
+		  // Set body
+		  ssd1306_SetCursor(2, y);
+		  ssd1306_WriteString(bodyLogotype, Font_11x18, White);
+		  y += 36;
+	  } else {
+		  // Set header
+		  ssd1306_SetCursor(2, y);
+		  ssd1306_WriteString(headerDisconnected, Font_7x10, White);
+		  y += 30;
+
+		  // Set body
+		  ssd1306_SetCursor(2, y);
+		  ssd1306_WriteString(bodyLogotype, Font_11x18, White);
+		  y += 36;
+	  }
+
+	  // Show content
 	  ssd1306_UpdateScreen();
 	  y = 0;
 

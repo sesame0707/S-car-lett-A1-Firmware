@@ -9,6 +9,7 @@
 #define INC_COMMONVARIABLES_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /* OLED */
 enum Header {
@@ -21,6 +22,8 @@ enum Body {
 	VERSION = 1,
 	LOGOTYPE = 2
 };
+
+extern bool isConnected;
 
 /* LED stripes */
 enum StripesEffect {

@@ -7,6 +7,9 @@
 
 #include "commonVariables.h"
 
+/* OLED */
+bool isConnected = true;
+
 /* LED stripes */
 enum StripesEffect stripesEffect = NONE;
 
