@@ -496,7 +496,7 @@ void StartLEDStripesTask(void *argument)
 	ws2812b_led_t leds[LED_COUNT];
 	struct DesiredStripesColor desiredStripesColor;
 	setLEDStripesEffect(stripesEffect, &desiredStripesColor);
-	for(int i=0; i<LED_COUNT; i++) {
+	for(int i = 0; i < LED_COUNT; i ++) {
 	  leds[i].red = desiredStripesColor.red;
 	  leds[i].green = desiredStripesColor.green;
 	  leds[i].blue = desiredStripesColor.blue;
@@ -531,7 +531,7 @@ void StartLEDStripesTask(void *argument)
 
 	  // Update LED color
 	  setLEDStripesEffect(stripesEffect, &desiredStripesColor);
-	  for(int i=0; i<LED_COUNT; i++) {
+	  for(int i = 0; i < LED_COUNT; i ++) {
 		  leds[i].red = desiredStripesColor.red;
 		  leds[i].green = desiredStripesColor.green;
 		  leds[i].blue = desiredStripesColor.blue;
@@ -679,7 +679,7 @@ void StartDecelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  if (sliderAccelerateDecelerateCurrentValue > -2){
+	  if(sliderAccelerateDecelerateCurrentValue > -2){
 		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
 		  sliderAccelerateDecelerateCurrentValue --;
 	  }
@@ -710,6 +710,16 @@ void StartTurnLeftTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  if(sliderLeftRightCurrentValue > -3) {
+		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
+		  sliderLeftRightCurrentValue --;
+
+		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
+		  TIM4->CCR3 = 100;
+		  osDelay(70);
+		  TIM4->CCR3 = 0;
+	  }
   }
   /* USER CODE END StartTurnLeftTask */
 }
@@ -728,6 +738,16 @@ void StartTurnRightTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  if(sliderLeftRightCurrentValue < 3) {
+		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
+		  sliderLeftRightCurrentValue ++;
+
+		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
+		  TIM4->CCR3 = 100;
+		  osDelay(70);
+		  TIM4->CCR3 = 0;
+	  }
   }
   /* USER CODE END StartTurnRightTask */
 }

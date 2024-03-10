@@ -10,8 +10,8 @@
 ../Core/Src/freertos.c:624:6:StartParkRightTask	1
 ../Core/Src/freertos.c:642:6:StartAccelerateTask	3
 ../Core/Src/freertos.c:673:6:StartDecelerateTask	3
-../Core/Src/freertos.c:706:6:StartTurnLeftTask	1
-../Core/Src/freertos.c:724:6:StartTurnRightTask	1
-../Core/Src/freertos.c:742:6:StartConnectionTask	1
-../Core/Src/freertos.c:760:6:StartBrakeLightsTask	1
-../Core/Src/freertos.c:782:6:StartWithdrawLightsTask	2
+../Core/Src/freertos.c:706:6:StartTurnLeftTask	2
+../Core/Src/freertos.c:734:6:StartTurnRightTask	2
+../Core/Src/freertos.c:762:6:StartConnectionTask	1
+../Core/Src/freertos.c:780:6:StartBrakeLightsTask	1
+../Core/Src/freertos.c:802:6:StartWithdrawLightsTask	2

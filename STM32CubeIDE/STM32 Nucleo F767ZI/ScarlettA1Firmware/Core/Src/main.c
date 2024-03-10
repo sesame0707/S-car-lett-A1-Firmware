@@ -103,6 +103,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart6, RxBuffer, 1);
   HAL_DAC_Start(&hdac, DAC1_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
   /* USER CODE END 2 */
 
   /* Init scheduler */
