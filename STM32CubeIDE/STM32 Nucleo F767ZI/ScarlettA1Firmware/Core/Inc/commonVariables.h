@@ -23,7 +23,7 @@ enum Body {
 	LOGOTYPE = 2
 };
 
-extern bool isConnected;
+extern volatile bool isConnected;
 
 /* LED stripes */
 enum StripesEffect {
@@ -35,8 +35,10 @@ enum StripesEffect {
 	PARK_NOT_FOUND = 6
 };
 
-extern enum StripesEffect stripesEffect;
-extern bool isOn;
+extern volatile enum StripesEffect stripesEffect;
+extern volatile bool isOn;
+extern volatile bool ommitToggle;
+extern volatile bool isStopped;
 
 struct DesiredStripesColor {
 	uint8_t red;
@@ -45,17 +47,17 @@ struct DesiredStripesColor {
 };
 
 /* BLDC motor */
-extern int sliderAccelerateDeceleratePreviousValue;
-extern int sliderAccelerateDecelerateCurrentValue;
-extern bool isWithdrawing;
-extern float BLDCMotorSpeedVoltage;
-extern uint32_t BLDCMotorSpeedValue;
+extern volatile int sliderAccelerateDeceleratePreviousValue;
+extern volatile int sliderAccelerateDecelerateCurrentValue;
+extern volatile bool isWithdrawing;
+extern volatile float BLDCMotorSpeedVoltage;
+extern volatile uint32_t BLDCMotorSpeedValue;
 
 /* Stepper motor */
-extern int sliderLeftRightPreviousValue;
-extern int sliderLeftRightCurrentValue;
+extern volatile int sliderLeftRightPreviousValue;
+extern volatile int sliderLeftRightCurrentValue;
 
 /* UART */
-extern uint8_t RxBuffer[];
+extern volatile uint8_t RxBuffer[];
 
 #endif /* INC_COMMONVARIABLES_H_ */

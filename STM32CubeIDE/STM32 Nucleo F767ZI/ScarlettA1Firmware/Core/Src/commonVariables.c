@@ -8,22 +8,24 @@
 #include "commonVariables.h"
 
 /* OLED */
-bool isConnected = true;
+volatile bool isConnected = true;
 
 /* LED stripes */
-enum StripesEffect stripesEffect = NONE;
-bool isOn = false;
+volatile enum StripesEffect stripesEffect = NONE;
+volatile bool isOn = false;
+volatile bool ommitToggle = false;
+volatile bool isStopped = false;
 
 /* BLDC motor */
-int sliderAccelerateDeceleratePreviousValue = 0;
-int sliderAccelerateDecelerateCurrentValue = 0;
-bool isWithdrawing = false;
-float BLDCMotorSpeedVoltage = 0.0;
-uint32_t BLDCMotorSpeedValue = 0.0;
+volatile int sliderAccelerateDeceleratePreviousValue = 0;
+volatile int sliderAccelerateDecelerateCurrentValue = 0;
+volatile bool isWithdrawing = false;
+volatile float BLDCMotorSpeedVoltage = 0.0;
+volatile uint32_t BLDCMotorSpeedValue = 0.0;
 
 /* Stepper motor */
-int sliderLeftRightPreviousValue = 0;
-int sliderLeftRightCurrentValue = 0;
+volatile int sliderLeftRightPreviousValue = 0;
+volatile int sliderLeftRightCurrentValue = 0;
 
 /* UART */
-uint8_t RxBuffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+volatile uint8_t RxBuffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};

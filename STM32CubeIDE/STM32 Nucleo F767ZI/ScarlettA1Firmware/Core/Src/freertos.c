@@ -60,22 +60,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-/* UART */
-extern uint8_t RxBuffer[];
-
-/* OLED */
-extern bool isConnected;
-
 /* LED stripes */
 extern SPI_HandleTypeDef hspi1;
-extern enum StripesEffect stripesEffect;
-extern bool isOn;
-
-/* BLDC motor */
-extern DAC_HandleTypeDef hdac;
-extern bool isWithdrawing;
-extern float BLDCMotorSpeedVoltage;
-extern uint32_t BLDCMotorSpeedValue;
 /* USER CODE END Variables */
 /* Definitions for OLEDTask */
 osThreadId_t OLEDTaskHandle;
@@ -441,6 +427,17 @@ void StartStopTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  // Stop BLDC motor
+	  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
+	  sliderAccelerateDecelerateCurrentValue = 0;
+	  setBLDCMotorSpeed();
+
+	  // Set LED stripes
+	  isStopped = true;
+	  stripesEffect = STOP;
+	  ommitToggle = true;
+	  vTaskResume(LEDStripesTaskHandle);
   }
   /* USER CODE END StartStopTask */
 }
@@ -515,19 +512,30 @@ void StartLEDStripesTask(void *argument)
 	// Create buffer
 	uint8_t dma_buf[ws2812b_required_buffer_len(&hws2812b)];
 
+	// Fill buffer
+	ws2812b_fill_buffer(&hws2812b, dma_buf);
+
+	// Transmit
+	HAL_SPI_Transmit_DMA(&hspi1, dma_buf, ws2812b_required_buffer_len(&hws2812b));
+	HAL_Delay(10); // 10ms delay
+
   /* Infinite loop */
   for(;;)
   {
 	  vTaskSuspend(NULL);
 
-	  // Toggle effect
-	  if (isOn == false) {
-		  isOn = !isOn;
-		  stripesEffect = DEFAULT;
-	  } else {
-		  isOn = !isOn;
-		  stripesEffect = NONE;
+	  if(ommitToggle == false) {
+		  // Toggle effect
+		  if(isOn == false) {
+			  isOn = true;
+			  stripesEffect = DEFAULT;
+		  } else {
+			  isOn = false;
+			  stripesEffect = NONE;
+		  }
 	  }
+
+	  ommitToggle = false;
 
 	  // Update LED color
 	  setLEDStripesEffect(stripesEffect, &desiredStripesColor);
@@ -648,13 +656,26 @@ void StartAccelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // Turn off LED stripes' stop effect if present
+	  if(isStopped) {
+		  isStopped = false;
+		  if(isOn) {
+			  stripesEffect = DEFAULT;
+		  } else {
+			  stripesEffect = NONE;
+		  }
+		  ommitToggle = true;
+		  vTaskResume(LEDStripesTaskHandle);
+	  }
+
+	  // Accelerate if possible
 	  if(sliderAccelerateDecelerateCurrentValue < 4) {
 		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
 		  sliderAccelerateDecelerateCurrentValue ++;
 	  }
-
 	  setBLDCMotorSpeed();
 
+	  // Set withdraw lights appropriately
 	  if(sliderAccelerateDecelerateCurrentValue >= 0) {
 		  isWithdrawing = false;
 		  vTaskResume(WithdrawLightsTHandle);
@@ -679,13 +700,26 @@ void StartDecelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // Turn off LED stripes' stop effect if present
+	  if(isStopped) {
+		  isStopped = false;
+		  if(isOn) {
+			  stripesEffect = DEFAULT;
+		  } else {
+			  stripesEffect = NONE;
+		  }
+		  ommitToggle = true;
+		  vTaskResume(LEDStripesTaskHandle);
+	  }
+
+	  // Decelerate if possible
 	  if(sliderAccelerateDecelerateCurrentValue > -2){
 		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
 		  sliderAccelerateDecelerateCurrentValue --;
 	  }
-
 	  setBLDCMotorSpeed();
 
+	  // Set withdraw lights appropriately
 	  if(sliderAccelerateDecelerateCurrentValue >= 0) {
 		  vTaskResume(BrakeLightsTaskHandle);
 	  } else {
