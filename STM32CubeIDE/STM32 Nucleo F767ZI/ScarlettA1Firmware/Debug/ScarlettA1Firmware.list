@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  000200f2  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00028046  00000000  00000000  00020135  2**0
+ 13 .debug_info   00027dae  00000000  00000000  00020135  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00005aac  00000000  00000000  0004817b  2**0
+ 14 .debug_abbrev 00005a99  00000000  00000000  00047ee3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001ef0  00000000  00000000  0004dc28  2**3
+ 15 .debug_aranges 00001ef0  00000000  00000000  0004d980  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 000017bf  00000000  00000000  0004fb18  2**0
+ 16 .debug_rnglists 000017bf  00000000  00000000  0004f870  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0002dd95  00000000  00000000  000512d7  2**0
+ 17 .debug_macro  0002dd95  00000000  00000000  0005102f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00029406  00000000  00000000  0007f06c  2**0
+ 18 .debug_line   0002940c  00000000  00000000  0007edc4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0010e84c  00000000  00000000  000a8472  2**0
+ 19 .debug_str    0010e84c  00000000  00000000  000a81d0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  000086a8  00000000  00000000  001b6cc0  2**2
+ 20 .debug_frame  000086a8  00000000  00000000  001b6a1c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000008c  00000000  00000000  001bf368  2**0
+ 21 .debug_line_str 0000008c  00000000  00000000  001bf0c4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2242,45 +2242,45 @@ void StartTurnLeftTask(void *argument)
  8001192:	f008 fbff 	bl	8009994 <vTaskSuspend>
 
 	  if(sliderLeftRightCurrentValue > -3) {
- 8001196:	4b0e      	ldr	r3, [pc, #56]	; (80011d0 <StartTurnLeftTask+0x48>)
+ 8001196:	4b0f      	ldr	r3, [pc, #60]	; (80011d4 <StartTurnLeftTask+0x4c>)
  8001198:	681b      	ldr	r3, [r3, #0]
  800119a:	f113 0f02 	cmn.w	r3, #2
  800119e:	dbf7      	blt.n	8001190 <StartTurnLeftTask+0x8>
 		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
- 80011a0:	4b0b      	ldr	r3, [pc, #44]	; (80011d0 <StartTurnLeftTask+0x48>)
+ 80011a0:	4b0c      	ldr	r3, [pc, #48]	; (80011d4 <StartTurnLeftTask+0x4c>)
  80011a2:	681b      	ldr	r3, [r3, #0]
- 80011a4:	4a0b      	ldr	r2, [pc, #44]	; (80011d4 <StartTurnLeftTask+0x4c>)
+ 80011a4:	4a0c      	ldr	r2, [pc, #48]	; (80011d8 <StartTurnLeftTask+0x50>)
  80011a6:	6013      	str	r3, [r2, #0]
 		  sliderLeftRightCurrentValue --;
- 80011a8:	4b09      	ldr	r3, [pc, #36]	; (80011d0 <StartTurnLeftTask+0x48>)
+ 80011a8:	4b0a      	ldr	r3, [pc, #40]	; (80011d4 <StartTurnLeftTask+0x4c>)
  80011aa:	681b      	ldr	r3, [r3, #0]
  80011ac:	3b01      	subs	r3, #1
- 80011ae:	4a08      	ldr	r2, [pc, #32]	; (80011d0 <StartTurnLeftTask+0x48>)
+ 80011ae:	4a09      	ldr	r2, [pc, #36]	; (80011d4 <StartTurnLeftTask+0x4c>)
  80011b0:	6013      	str	r3, [r2, #0]
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
  80011b2:	2201      	movs	r2, #1
  80011b4:	f44f 4100 	mov.w	r1, #32768	; 0x8000
- 80011b8:	4807      	ldr	r0, [pc, #28]	; (80011d8 <StartTurnLeftTask+0x50>)
+ 80011b8:	4808      	ldr	r0, [pc, #32]	; (80011dc <StartTurnLeftTask+0x54>)
  80011ba:	f002 fc6d 	bl	8003a98 <HAL_GPIO_WritePin>
 		  TIM4->CCR3 = 100;
- 80011be:	4b07      	ldr	r3, [pc, #28]	; (80011dc <StartTurnLeftTask+0x54>)
+ 80011be:	4b08      	ldr	r3, [pc, #32]	; (80011e0 <StartTurnLeftTask+0x58>)
  80011c0:	2264      	movs	r2, #100	; 0x64
  80011c2:	63da      	str	r2, [r3, #60]	; 0x3c
-//		  osDelay(70);
-//		  TIM4->CCR3 = 0;
-		  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
- 80011c4:	2108      	movs	r1, #8
- 80011c6:	4806      	ldr	r0, [pc, #24]	; (80011e0 <StartTurnLeftTask+0x58>)
- 80011c8:	f005 f902 	bl	80063d0 <HAL_TIM_PWM_Start>
+		  osDelay(70);
+ 80011c4:	2046      	movs	r0, #70	; 0x46
+ 80011c6:	f007 fbcf 	bl	8008968 <osDelay>
+		  TIM4->CCR3 = 0;
+ 80011ca:	4b05      	ldr	r3, [pc, #20]	; (80011e0 <StartTurnLeftTask+0x58>)
+ 80011cc:	2200      	movs	r2, #0
+ 80011ce:	63da      	str	r2, [r3, #60]	; 0x3c
 	  vTaskSuspend(NULL);
- 80011cc:	e7e0      	b.n	8001190 <StartTurnLeftTask+0x8>
- 80011ce:	bf00      	nop
- 80011d0:	200000fc 	.word	0x200000fc
- 80011d4:	200000f8 	.word	0x200000f8
- 80011d8:	40020c00 	.word	0x40020c00
- 80011dc:	40000800 	.word	0x40000800
- 80011e0:	200006cc 	.word	0x200006cc
+ 80011d0:	e7de      	b.n	8001190 <StartTurnLeftTask+0x8>
+ 80011d2:	bf00      	nop
+ 80011d4:	200000fc 	.word	0x200000fc
+ 80011d8:	200000f8 	.word	0x200000f8
+ 80011dc:	40020c00 	.word	0x40020c00
+ 80011e0:	40000800 	.word	0x40000800
 
 080011e4 <StartTurnRightTask>:
 * @param argument: Not used
