@@ -57,7 +57,6 @@
 /* External variables --------------------------------------------------------*/
 extern DAC_HandleTypeDef hdac;
 extern DMA_HandleTypeDef hdma_spi1_tx;
-extern TIM_HandleTypeDef htim13;
 extern UART_HandleTypeDef huart6;
 extern TIM_HandleTypeDef htim6;
 
@@ -162,20 +161,6 @@ void DebugMon_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f7xx.s).                    */
 /******************************************************************************/
-
-/**
-  * @brief This function handles TIM8 update interrupt and TIM13 global interrupt.
-  */
-void TIM8_UP_TIM13_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM8_UP_TIM13_IRQn 0 */
-
-  /* USER CODE END TIM8_UP_TIM13_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim13);
-  /* USER CODE BEGIN TIM8_UP_TIM13_IRQn 1 */
-
-  /* USER CODE END TIM8_UP_TIM13_IRQn 1 */
-}
 
 /**
   * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.

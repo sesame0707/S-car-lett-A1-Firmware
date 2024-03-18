@@ -100,12 +100,10 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM4_Init();
   MX_USART6_UART_Init();
-  MX_TIM13_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart6, RxBuffer, 1);
   HAL_DAC_Start(&hdac, DAC1_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
-  TIM13->EGR |= TIM_EGR_UG;	// Send an update event to reset the timer
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -198,11 +196,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart6x) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
-	// Check which timer triggered this callback
-	if(htim == &htim13) {
-		TIM4->CCR3 = 0;
-		HAL_TIM_Base_Stop_IT(&htim13);
-	}
+
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM6) {
     HAL_IncTick();

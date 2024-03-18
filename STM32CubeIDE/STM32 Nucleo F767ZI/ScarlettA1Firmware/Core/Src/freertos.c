@@ -62,9 +62,6 @@
 /* USER CODE BEGIN Variables */
 /* LED stripes */
 extern SPI_HandleTypeDef hspi1;
-
-/* Stepper motor */
-extern TIM_HandleTypeDef htim13;
 /* USER CODE END Variables */
 /* Definitions for OLEDTask */
 osThreadId_t OLEDTaskHandle;
@@ -754,7 +751,6 @@ void StartTurnLeftTask(void *argument)
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
 		  TIM4->CCR3 = 100;
-//		  HAL_TIM_Base_Start_IT(&htim13);
 		  osDelay(70);
 		  TIM4->CCR3 = 0;
 	  }
@@ -783,7 +779,8 @@ void StartTurnRightTask(void *argument)
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
 		  TIM4->CCR3 = 100;
-		  HAL_TIM_Base_Start_IT(&htim13);
+		  osDelay(70);
+		  TIM4->CCR3 = 0;
 	  }
   }
   /* USER CODE END StartTurnRightTask */
