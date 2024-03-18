@@ -750,8 +750,8 @@ void StartTurnLeftTask(void *argument)
 		  sliderLeftRightCurrentValue --;
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
-		  TIM4->CCR3 = 100;
-		  osDelay(70);
+		  TIM4->CCR3 = 500;
+		  osDelay(35);
 		  TIM4->CCR3 = 0;
 	  }
   }
@@ -778,8 +778,8 @@ void StartTurnRightTask(void *argument)
 		  sliderLeftRightCurrentValue ++;
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
-		  TIM4->CCR3 = 100;
-		  osDelay(70);
+		  TIM4->CCR3 = 500;
+		  osDelay(35);
 		  TIM4->CCR3 = 0;
 	  }
   }
