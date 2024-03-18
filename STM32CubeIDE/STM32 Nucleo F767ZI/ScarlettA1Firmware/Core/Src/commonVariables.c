@@ -8,7 +8,7 @@
 #include "commonVariables.h"
 
 /* OLED */
-volatile bool isConnected = true;
+volatile bool isConnected = false;
 
 /* LED stripes */
 volatile enum StripesEffect stripesEffect = NONE;

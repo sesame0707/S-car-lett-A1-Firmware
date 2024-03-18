@@ -30,16 +30,6 @@ void setLEDStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripes
 		desiredStripesColor->green = 0x00;
 		desiredStripesColor->blue = 0x40;
 		break;
-	case 5:
-		desiredStripesColor->red = 0x00;
-		desiredStripesColor->green = 0x40;
-		desiredStripesColor->blue = 0x00;
-		break;
-	case 6:
-		desiredStripesColor->red = 0x40;
-		desiredStripesColor->green = 0x00;
-		desiredStripesColor->blue = 0x00;
-		break;
 	}
 }
 
@@ -77,4 +67,11 @@ void setBLDCMotorSpeed(void) {
 
 	BLDCMotorSpeedValue = BLDCMotorSpeedVoltage * (0xfff + 1) / 3.3;
 	HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R, BLDCMotorSpeedValue);
+}
+
+/* Stepper motor */
+void moveStepperMotor(void) {
+	TIM4->CCR3 = 500;
+	osDelay(35);
+	TIM4->CCR3 = 0;
 }

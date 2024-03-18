@@ -30,9 +30,7 @@ enum StripesEffect {
 	NONE = 1,
 	DEFAULT = 2,
 	STOP = 3,
-	PARK_SEARCHING = 4,
-	PARK_FOUND = 5,
-	PARK_NOT_FOUND = 6
+	PARKING = 4
 };
 
 extern volatile enum StripesEffect stripesEffect;

@@ -10,11 +10,15 @@
 
 #include "commonVariables.h"
 #include "dac.h"
+#include "cmsis_os2.h"
 
 /* LED stripes */
 void setLEDStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripesColor *desiredStripesColor);
 
 /* BLDC motor */
 void setBLDCMotorSpeed(void);
+
+/* Stepper motor */
+void moveStepperMotor(void);
 
 #endif /* INC_COMMONFUNCTIONS_H_ */

@@ -145,14 +145,14 @@ osThreadId_t TurnLeftTaskHandle;
 const osThreadAttr_t TurnLeftTask_attributes = {
   .name = "TurnLeftTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for TurnRightTask */
 osThreadId_t TurnRightTaskHandle;
 const osThreadAttr_t TurnRightTask_attributes = {
   .name = "TurnRightTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for ConnectionTask */
 osThreadId_t ConnectionTaskHandle;
@@ -174,6 +174,18 @@ const osThreadAttr_t WithdrawLightsT_attributes = {
   .name = "WithdrawLightsT",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for ResumeFromStopT */
+osThreadId_t ResumeFromStopTHandle;
+const osThreadAttr_t ResumeFromStopT_attributes = {
+  .name = "ResumeFromStopT",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for ConnectionTaskTimer */
+osTimerId_t ConnectionTaskTimerHandle;
+const osTimerAttr_t ConnectionTaskTimer_attributes = {
+  .name = "ConnectionTaskTimer"
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -197,6 +209,8 @@ void StartTurnRightTask(void *argument);
 void StartConnectionTask(void *argument);
 void StartBrakeLightsTask(void *argument);
 void StartWithdrawLightsTask(void *argument);
+void StartResumeFromStopTask(void *argument);
+void CallbackConnectionTaskTimer(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -217,6 +231,10 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
+
+  /* Create the timer(s) */
+  /* creation of ConnectionTaskTimer */
+  ConnectionTaskTimerHandle = osTimerNew(CallbackConnectionTaskTimer, osTimerOnce, NULL, &ConnectionTaskTimer_attributes);
 
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
@@ -274,6 +292,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of WithdrawLightsT */
   WithdrawLightsTHandle = osThreadNew(StartWithdrawLightsTask, NULL, &WithdrawLightsT_attributes);
+
+  /* creation of ResumeFromStopT */
+  ResumeFromStopTHandle = osThreadNew(StartResumeFromStopTask, NULL, &ResumeFromStopT_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -438,6 +459,28 @@ void StartStopTask(void *argument)
 	  stripesEffect = STOP;
 	  ommitToggle = true;
 	  vTaskResume(LEDStripesTaskHandle);
+
+	  // Home stepper motor
+	  if(sliderLeftRightCurrentValue == 0) {
+		  // Do nothing
+	  } else if(sliderLeftRightCurrentValue > 0) {
+		  // Turn left until center
+		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
+		  for(sliderLeftRightCurrentValue; sliderLeftRightCurrentValue != 0; sliderLeftRightPreviousValue = sliderLeftRightCurrentValue --) {
+			  moveStepperMotor();
+		  }
+	  } else {
+		  // Turn right until center
+		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
+		  for(sliderLeftRightCurrentValue; sliderLeftRightCurrentValue != 0; sliderLeftRightPreviousValue = sliderLeftRightCurrentValue ++) {
+			  moveStepperMotor();
+		  }
+	  }
+
+	  // Turn off all the lights
+	  HAL_GPIO_WritePin(DrivingLights_GPIO_Port, DrivingLights_Pin, RESET);
+	  HAL_GPIO_WritePin(BrakeLights_GPIO_Port, BrakeLights_Pin, RESET);
+	  HAL_GPIO_WritePin(WithdrawLights_GPIO_Port, WithdrawLights_Pin, RESET);
   }
   /* USER CODE END StartStopTask */
 }
@@ -456,6 +499,13 @@ void StartDrivingLightsTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  // Exit stopped state if applicable
+	  if(isStopped) {
+		  vTaskResume(ResumeFromStopTHandle);
+	  }
+
+	  // Driving lights effect
 	  HAL_GPIO_TogglePin(DrivingLights_GPIO_Port, DrivingLights_Pin);
   }
   /* USER CODE END StartDrivingLightsTask */
@@ -504,7 +554,7 @@ void StartLEDStripesTask(void *argument)
 	hws2812b.leds = leds;
 
 	// Initialize the driver
-	if(ws2812b_init(&hws2812b)){
+	if(ws2812b_init(&hws2812b)) {
 	  printf("Invalid ws2812b config! (%s)\r\n",ws2812b_error_msg);
 	  while(1) {;}
 	}
@@ -524,8 +574,8 @@ void StartLEDStripesTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // LED stripes effect
 	  if(ommitToggle == false) {
-		  // Toggle effect
 		  if(isOn == false) {
 			  isOn = true;
 			  stripesEffect = DEFAULT;
@@ -534,7 +584,6 @@ void StartLEDStripesTask(void *argument)
 			  stripesEffect = NONE;
 		  }
 	  }
-
 	  ommitToggle = false;
 
 	  // Update LED color
@@ -572,10 +621,16 @@ void StartLeftBlinkersTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
-	  for(int i = 0; i < 6; i ++)
-	  {
+
+	  // Exit stopped state if applicable
+	  if(isStopped) {
+		  vTaskResume(ResumeFromStopTHandle);
+	  }
+
+	  // Left blinkers effect
+	  for(int i = 0; i < 6; i ++) {
 		  HAL_GPIO_TogglePin(LeftBlinkers_GPIO_Port, LeftBlinkers_Pin);
-		  osDelay(400);
+		  osDelay(BLINKERS_DURATION);
 	  }
   }
   /* USER CODE END StartLeftBlinkersTask */
@@ -595,10 +650,16 @@ void StartRightBlinkersTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
-	  for(int i = 0; i < 6; i ++)
-	  {
+
+	  // Exit stopped state if applicable
+	  if(isStopped) {
+		  vTaskResume(ResumeFromStopTHandle);
+	  }
+
+	  // Right blinkers effect
+	  for(int i = 0; i < 6; i ++) {
 		  HAL_GPIO_TogglePin(RightBlinkers_GPIO_Port, RightBlinkers_Pin);
-		  osDelay(400);
+		  osDelay(BLINKERS_DURATION);
 	  }
   }
   /* USER CODE END StartRightBlinkersTask */
@@ -618,6 +679,13 @@ void StartParkLeftTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  // Exit stopped state if applicable
+	  if(isStopped) {
+		  vTaskResume(ResumeFromStopTHandle);
+	  }
+
+	  // TODO: implement
   }
   /* USER CODE END StartParkLeftTask */
 }
@@ -636,6 +704,13 @@ void StartParkRightTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  // Exit stopped state if applicable
+	  if(isStopped) {
+		  vTaskResume(ResumeFromStopTHandle);
+	  }
+
+	  // TODO: implement
   }
   /* USER CODE END StartParkRightTask */
 }
@@ -656,16 +731,9 @@ void StartAccelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Turn off LED stripes' stop effect if present
+	  // Exit stopped state if applicable
 	  if(isStopped) {
-		  isStopped = false;
-		  if(isOn) {
-			  stripesEffect = DEFAULT;
-		  } else {
-			  stripesEffect = NONE;
-		  }
-		  ommitToggle = true;
-		  vTaskResume(LEDStripesTaskHandle);
+		  vTaskResume(ResumeFromStopTHandle);
 	  }
 
 	  // Accelerate if possible
@@ -700,20 +768,13 @@ void StartDecelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Turn off LED stripes' stop effect if present
+	  // Exit stopped state if applicable
 	  if(isStopped) {
-		  isStopped = false;
-		  if(isOn) {
-			  stripesEffect = DEFAULT;
-		  } else {
-			  stripesEffect = NONE;
-		  }
-		  ommitToggle = true;
-		  vTaskResume(LEDStripesTaskHandle);
+		  vTaskResume(ResumeFromStopTHandle);
 	  }
 
 	  // Decelerate if possible
-	  if(sliderAccelerateDecelerateCurrentValue > -2){
+	  if(sliderAccelerateDecelerateCurrentValue > -2) {
 		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
 		  sliderAccelerateDecelerateCurrentValue --;
 	  }
@@ -745,14 +806,18 @@ void StartTurnLeftTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // Exit stopped state if applicable
+	  if(isStopped) {
+		  vTaskResume(ResumeFromStopTHandle);
+	  }
+
+	  // Turn left if possible
 	  if(sliderLeftRightCurrentValue > -3) {
 		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
 		  sliderLeftRightCurrentValue --;
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
-		  TIM4->CCR3 = 500;
-		  osDelay(35);
-		  TIM4->CCR3 = 0;
+		  moveStepperMotor();
 	  }
   }
   /* USER CODE END StartTurnLeftTask */
@@ -773,14 +838,18 @@ void StartTurnRightTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // Exit stopped state if applicable
+	  if(isStopped) {
+		  vTaskResume(ResumeFromStopTHandle);
+	  }
+
+	  // Turn right if possible
 	  if(sliderLeftRightCurrentValue < 3) {
 		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
 		  sliderLeftRightCurrentValue ++;
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
-		  TIM4->CCR3 = 500;
-		  osDelay(35);
-		  TIM4->CCR3 = 0;
+		  moveStepperMotor();
 	  }
   }
   /* USER CODE END StartTurnRightTask */
@@ -800,6 +869,11 @@ void StartConnectionTask(void *argument)
   for(;;)
   {
 	  vTaskSuspend(NULL);
+
+	  // Refresh connection state
+	  osTimerStart(ConnectionTaskTimerHandle, (ACKNOWLEDGE_PACKETS_FREQUENCY + TIME_MARGIN));
+	  isConnected = true;
+	  vTaskResume(OLEDTaskHandle);
   }
   /* USER CODE END StartConnectionTask */
 }
@@ -819,6 +893,7 @@ void StartBrakeLightsTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // Brake lights effect
 	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
 	  osDelay(BRAKE_LIGHTS_DURATION);
 	  HAL_GPIO_TogglePin(BrakeLights_GPIO_Port, BrakeLights_Pin);
@@ -841,6 +916,7 @@ void StartWithdrawLightsTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // Withdraw lights effect
 	  if(isWithdrawing) {
 		  HAL_GPIO_WritePin(WithdrawLights_GPIO_Port, WithdrawLights_Pin, SET);
 	  } else {
@@ -848,6 +924,46 @@ void StartWithdrawLightsTask(void *argument)
 	  }
   }
   /* USER CODE END StartWithdrawLightsTask */
+}
+
+/* USER CODE BEGIN Header_StartResumeFromStopTask */
+/**
+* @brief Function implementing the ResumeFromStopT thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartResumeFromStopTask */
+void StartResumeFromStopTask(void *argument)
+{
+  /* USER CODE BEGIN StartResumeFromStopTask */
+  /* Infinite loop */
+  for(;;)
+  {
+	  vTaskSuspend(NULL);
+
+	  // Turn off LED stripes' stop effect if present
+	  if(isStopped) {
+		  isStopped = false;
+		  if(isOn) {
+			  stripesEffect = DEFAULT;
+		  } else {
+			  stripesEffect = NONE;
+		  }
+		  ommitToggle = true;
+		  vTaskResume(LEDStripesTaskHandle);
+	  }
+  }
+  /* USER CODE END StartResumeFromStopTask */
+}
+
+/* CallbackConnectionTaskTimer function */
+void CallbackConnectionTaskTimer(void *argument)
+{
+  /* USER CODE BEGIN CallbackConnectionTaskTimer */
+	vTaskResume(StopTaskHandle);
+	isConnected = false;
+	vTaskResume(OLEDTaskHandle);
+  /* USER CODE END CallbackConnectionTaskTimer */
 }
 
 /* Private application code --------------------------------------------------*/
