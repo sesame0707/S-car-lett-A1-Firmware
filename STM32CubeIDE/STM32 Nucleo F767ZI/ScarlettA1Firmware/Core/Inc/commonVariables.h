@@ -11,26 +11,32 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+/* General */
+enum Direction {
+	LEFT = 0,
+	RIGHT = 1
+};
+
 /* OLED */
 enum Header {
-	BOOTING_UP = 1,
-	DISCONNECTED = 2,
-	CONNECTED = 3
+	BOOTING_UP = 0,
+	DISCONNECTED = 1,
+	CONNECTED = 2
 };
 
 enum Body {
-	VERSION = 1,
-	LOGOTYPE = 2
+	VERSION = 0,
+	LOGOTYPE = 1
 };
 
 extern volatile bool isConnected;
 
 /* LED stripes */
 enum StripesEffect {
-	NONE = 1,
-	DEFAULT = 2,
-	STOP = 3,
-	PARKING = 4
+	NONE = 0,
+	DEFAULT = 1,
+	STOP = 2,
+	PARKING = 3
 };
 
 extern volatile enum StripesEffect stripesEffect;

@@ -461,21 +461,7 @@ void StartStopTask(void *argument)
 	  vTaskResume(LEDStripesTaskHandle);
 
 	  // Home stepper motor
-	  if(sliderLeftRightCurrentValue == 0) {
-		  // Do nothing
-	  } else if(sliderLeftRightCurrentValue > 0) {
-		  // Turn left until center
-		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
-		  for(sliderLeftRightCurrentValue; sliderLeftRightCurrentValue != 0; sliderLeftRightPreviousValue = sliderLeftRightCurrentValue --) {
-			  moveStepperMotor();
-		  }
-	  } else {
-		  // Turn right until center
-		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
-		  for(sliderLeftRightCurrentValue; sliderLeftRightCurrentValue != 0; sliderLeftRightPreviousValue = sliderLeftRightCurrentValue ++) {
-			  moveStepperMotor();
-		  }
-	  }
+	  moveStepperMotorUntil(0);
 
 	  // Turn off all the lights
 	  HAL_GPIO_WritePin(DrivingLights_GPIO_Port, DrivingLights_Pin, RESET);
@@ -685,7 +671,8 @@ void StartParkLeftTask(void *argument)
 		  vTaskResume(ResumeFromStopTHandle);
 	  }
 
-	  // TODO: implement
+	  // Park to the left
+	  park(LEFT);
   }
   /* USER CODE END StartParkLeftTask */
 }
@@ -710,7 +697,8 @@ void StartParkRightTask(void *argument)
 		  vTaskResume(ResumeFromStopTHandle);
 	  }
 
-	  // TODO: implement
+	  // Park to the right
+	  park(RIGHT);
   }
   /* USER CODE END StartParkRightTask */
 }
@@ -816,8 +804,7 @@ void StartTurnLeftTask(void *argument)
 		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
 		  sliderLeftRightCurrentValue --;
 
-		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
-		  moveStepperMotor();
+		  moveStepperMotor(LEFT);
 	  }
   }
   /* USER CODE END StartTurnLeftTask */
@@ -848,8 +835,7 @@ void StartTurnRightTask(void *argument)
 		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
 		  sliderLeftRightCurrentValue ++;
 
-		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
-		  moveStepperMotor();
+		  moveStepperMotor(RIGHT);
 	  }
   }
   /* USER CODE END StartTurnRightTask */

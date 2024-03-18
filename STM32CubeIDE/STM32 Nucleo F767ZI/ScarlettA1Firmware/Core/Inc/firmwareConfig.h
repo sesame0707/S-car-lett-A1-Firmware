@@ -21,8 +21,14 @@
 #define SUFFIX_LEN	4
 #define LED_COUNT	7
 
+/* BLDC motor */
+#define LEFT_RIGHT_DURATION	50
+
 /* Lights */
 #define BLINKERS_DURATION		400
 #define BRAKE_LIGHTS_DURATION	500
+
+/* LiDAR sphere */
+#define ACCELERATE_DECELERATE_DURATION	1000
 
 #endif /* INC_FIRMWARECONFIG_H_ */

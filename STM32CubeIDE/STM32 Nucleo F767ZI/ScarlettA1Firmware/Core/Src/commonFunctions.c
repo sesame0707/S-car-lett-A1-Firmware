@@ -10,22 +10,22 @@
 /* LED stripes */
 void setLEDStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripesColor *desiredStripesColor) {
 	switch (stripesEffect) {
-	case 1:
+	case 0:
 		desiredStripesColor->red = 0x00;
 		desiredStripesColor->green = 0x00;
 		desiredStripesColor->blue = 0x00;
 		break;
-	case 2:
+	case 1:
 		desiredStripesColor->red = 0x40;
 		desiredStripesColor->green = 0x20;
 		desiredStripesColor->blue = 0x00;
 		break;
-	case 3:
+	case 2:
 		desiredStripesColor->red = 0x40;
 		desiredStripesColor->green = 0x40;
 		desiredStripesColor->blue = 0x40;
 		break;
-	case 4:
+	case 3:
 		desiredStripesColor->red = 0x00;
 		desiredStripesColor->green = 0x00;
 		desiredStripesColor->blue = 0x40;
@@ -70,8 +70,86 @@ void setBLDCMotorSpeed(void) {
 }
 
 /* Stepper motor */
-void moveStepperMotor(void) {
+void moveStepperMotor(enum Direction direction) {
+	if(direction == LEFT) {
+		HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
+	} else {
+		HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
+	}
+
 	TIM4->CCR3 = 500;
 	osDelay(35);
 	TIM4->CCR3 = 0;
+}
+
+void moveStepperMotorUntil(int targetLeftRightPosition) {
+	if(sliderLeftRightCurrentValue == targetLeftRightPosition) {
+		// Do nothing
+	} else if(sliderLeftRightCurrentValue > targetLeftRightPosition) {
+		// Turn left until target left/right position is reached
+		for(sliderLeftRightCurrentValue; sliderLeftRightCurrentValue != targetLeftRightPosition; sliderLeftRightPreviousValue = sliderLeftRightCurrentValue --) {
+			moveStepperMotor(LEFT);
+			osDelay(LEFT_RIGHT_DURATION);
+		}
+	} else {
+		// Turn right until target left/right position is reached
+		for(sliderLeftRightCurrentValue; sliderLeftRightCurrentValue != targetLeftRightPosition; sliderLeftRightPreviousValue = sliderLeftRightCurrentValue ++) {
+			moveStepperMotor(RIGHT);
+			osDelay(LEFT_RIGHT_DURATION);
+		}
+	}
+}
+
+/* LiDAR sphere */
+void park(enum Direction direction) {
+	// Private variables
+	int targetLeftRightPosition = 0;
+
+	// Stop BLDC motor
+	sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
+	sliderAccelerateDecelerateCurrentValue = 0;
+	setBLDCMotorSpeed();
+
+	// Set LED stripes
+	stripesEffect = PARKING;
+	ommitToggle = true;
+	vTaskResume(LEDStripesTaskHandle);
+
+	// Toggle left/right blinkers
+	if(direction == LEFT) {
+		vTaskResume(LeftBlinkersTasHandle);
+	} else {
+		vTaskResume(RightBlinkersTaHandle);
+	}
+
+	// Turn left/right to the destination
+	if(direction == LEFT) {
+		targetLeftRightPosition = -3;
+	} else {
+		targetLeftRightPosition = 3;
+	}
+	moveStepperMotorUntil(targetLeftRightPosition);
+
+	// Withdraw a little bit
+	vTaskResume(DecelerateTaskHandle);
+	osDelay(ACCELERATE_DECELERATE_DURATION);
+	vTaskResume(AccelerateTaskHandle);
+
+	// Turn left/right from the destination
+	targetLeftRightPosition = 0;
+	moveStepperMotorUntil(targetLeftRightPosition);
+
+	// Drive forward a little bit
+	vTaskResume(AccelerateTaskHandle);
+	osDelay(ACCELERATE_DECELERATE_DURATION / 2);
+	vTaskResume(DecelerateTaskHandle);
+
+	// Set LED stripes
+	if(isOn) {
+		stripesEffect = DEFAULT;
+	} else {
+		stripesEffect = NONE;
+	}
+	ommitToggle = true;
+	vTaskResume(LEDStripesTaskHandle);
 }
