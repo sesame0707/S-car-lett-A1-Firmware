@@ -145,14 +145,14 @@ osThreadId_t TurnLeftTaskHandle;
 const osThreadAttr_t TurnLeftTask_attributes = {
   .name = "TurnLeftTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityRealtime,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for TurnRightTask */
 osThreadId_t TurnRightTaskHandle;
 const osThreadAttr_t TurnRightTask_attributes = {
   .name = "TurnRightTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityRealtime,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for ConnectionTask */
 osThreadId_t ConnectionTaskHandle;
@@ -174,16 +174,6 @@ const osThreadAttr_t WithdrawLightsT_attributes = {
   .name = "WithdrawLightsT",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for turnLeftTimer */
-osTimerId_t turnLeftTimerHandle;
-const osTimerAttr_t turnLeftTimer_attributes = {
-  .name = "turnLeftTimer"
-};
-/* Definitions for turnRightTimer */
-osTimerId_t turnRightTimerHandle;
-const osTimerAttr_t turnRightTimer_attributes = {
-  .name = "turnRightTimer"
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -207,8 +197,6 @@ void StartTurnRightTask(void *argument);
 void StartConnectionTask(void *argument);
 void StartBrakeLightsTask(void *argument);
 void StartWithdrawLightsTask(void *argument);
-void turnLeftTimerCallback(void *argument);
-void turnRightTimerCallback(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -229,13 +217,6 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
-
-  /* Create the timer(s) */
-  /* creation of turnLeftTimer */
-  turnLeftTimerHandle = osTimerNew(turnLeftTimerCallback, osTimerOnce, NULL, &turnLeftTimer_attributes);
-
-  /* creation of turnRightTimer */
-  turnRightTimerHandle = osTimerNew(turnRightTimerCallback, osTimerOnce, NULL, &turnRightTimer_attributes);
 
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
@@ -770,9 +751,8 @@ void StartTurnLeftTask(void *argument)
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
 		  TIM4->CCR3 = 100;
-//		  osDelay(70);
-//		  TIM4->CCR3 = 0;
-		  osTimerStart(turnLeftTimerHandle, 70);
+		  osDelay(70);
+		  TIM4->CCR3 = 0;
 	  }
   }
   /* USER CODE END StartTurnLeftTask */
@@ -799,9 +779,8 @@ void StartTurnRightTask(void *argument)
 
 		  HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
 		  TIM4->CCR3 = 100;
-//		  osDelay(70);
-//		  TIM4->CCR3 = 0;
-		  osTimerStart(turnRightTimerHandle, 70);
+		  osDelay(70);
+		  TIM4->CCR3 = 0;
 	  }
   }
   /* USER CODE END StartTurnRightTask */
@@ -869,22 +848,6 @@ void StartWithdrawLightsTask(void *argument)
 	  }
   }
   /* USER CODE END StartWithdrawLightsTask */
-}
-
-/* turnLeftTimerCallback function */
-void turnLeftTimerCallback(void *argument)
-{
-  /* USER CODE BEGIN turnLeftTimerCallback */
-	TIM4->CCR3 = 0;
-  /* USER CODE END turnLeftTimerCallback */
-}
-
-/* turnRightTimerCallback function */
-void turnRightTimerCallback(void *argument)
-{
-  /* USER CODE BEGIN turnRightTimerCallback */
-	TIM4->CCR3 = 0;
-  /* USER CODE END turnRightTimerCallback */
 }
 
 /* Private application code --------------------------------------------------*/
