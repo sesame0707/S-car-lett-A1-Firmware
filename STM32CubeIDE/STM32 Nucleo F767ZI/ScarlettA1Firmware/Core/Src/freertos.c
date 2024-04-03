@@ -26,7 +26,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* System libraries */
-#include <string.h>
 #include <stdio.h>
 
 /* External libraries */
@@ -316,9 +315,6 @@ void MX_FREERTOS_Init(void) {
 void StartOLEDTask(void *argument)
 {
   /* USER CODE BEGIN StartOLEDTask */
-	// Prepare bodyVersion string
-	strcat(bodyVersion, versionName);
-
 	// Initiate display
 	ssd1306_Init();
 	uint8_t y = 0;
@@ -332,6 +328,7 @@ void StartOLEDTask(void *argument)
 	// Set body
 	ssd1306_SetCursor(2, y);
 	ssd1306_WriteString(bodyVersion, Font_11x18, White);
+	ssd1306_WriteString(versionName, Font_11x18, White);
 	y += 36;
 
 	// Show content

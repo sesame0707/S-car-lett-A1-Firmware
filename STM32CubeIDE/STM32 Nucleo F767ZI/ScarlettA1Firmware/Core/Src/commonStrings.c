@@ -8,8 +8,8 @@
 #include "commonStrings.h"
 
 /* Firmware information */
-const int versionCode = 1;
-const char versionName[] = "1.0";
+int versionCode = 2;
+char versionName[] = "1.1";
 
 /* OLED */
 char headerBootingUp[] = "Booting up...";

@@ -9,8 +9,8 @@
 #define INC_COMMONSTRINGS_H_
 
 /* Firmware information */
-extern const int versionCode;
-extern const char versionName[];
+extern int versionCode;
+extern char versionName[];
 
 /* OLED */
 extern char headerBootingUp[];
