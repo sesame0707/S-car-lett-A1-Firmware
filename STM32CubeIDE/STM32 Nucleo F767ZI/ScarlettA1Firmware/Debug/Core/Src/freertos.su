@@ -11,9 +11,9 @@
 ../Core/Src/freertos.c:755:6:StartAccelerateTask	16	static
 ../Core/Src/freertos.c:797:6:StartDecelerateTask	16	static
 ../Core/Src/freertos.c:841:6:StartTurnLeftTask	16	static
-../Core/Src/freertos.c:877:6:StartTurnRightTask	16	static
-../Core/Src/freertos.c:913:6:StartConnectionTask	16	static
-../Core/Src/freertos.c:936:6:StartBrakeLightsTask	16	static
-../Core/Src/freertos.c:959:6:StartWithdrawLightsTask	16	static
-../Core/Src/freertos.c:984:6:StartResumeFromStopTask	16	static
-../Core/Src/freertos.c:1008:6:CallbackConnectionTaskTimer	16	static
+../Core/Src/freertos.c:878:6:StartTurnRightTask	16	static
+../Core/Src/freertos.c:915:6:StartConnectionTask	16	static
+../Core/Src/freertos.c:938:6:StartBrakeLightsTask	16	static
+../Core/Src/freertos.c:961:6:StartWithdrawLightsTask	16	static
+../Core/Src/freertos.c:986:6:StartResumeFromStopTask	16	static
+../Core/Src/freertos.c:1010:6:CallbackConnectionTaskTimer	16	static

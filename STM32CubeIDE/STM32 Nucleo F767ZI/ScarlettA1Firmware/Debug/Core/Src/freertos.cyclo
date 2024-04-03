@@ -11,9 +11,9 @@
 ../Core/Src/freertos.c:755:6:StartAccelerateTask	6
 ../Core/Src/freertos.c:797:6:StartDecelerateTask	6
 ../Core/Src/freertos.c:841:6:StartTurnLeftTask	5
-../Core/Src/freertos.c:877:6:StartTurnRightTask	5
-../Core/Src/freertos.c:913:6:StartConnectionTask	1
-../Core/Src/freertos.c:936:6:StartBrakeLightsTask	1
-../Core/Src/freertos.c:959:6:StartWithdrawLightsTask	2
-../Core/Src/freertos.c:984:6:StartResumeFromStopTask	3
-../Core/Src/freertos.c:1008:6:CallbackConnectionTaskTimer	1
+../Core/Src/freertos.c:878:6:StartTurnRightTask	5
+../Core/Src/freertos.c:915:6:StartConnectionTask	1
+../Core/Src/freertos.c:938:6:StartBrakeLightsTask	1
+../Core/Src/freertos.c:961:6:StartWithdrawLightsTask	2
+../Core/Src/freertos.c:986:6:StartResumeFromStopTask	3
+../Core/Src/freertos.c:1010:6:CallbackConnectionTaskTimer	1

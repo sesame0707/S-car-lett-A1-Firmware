@@ -71,6 +71,8 @@ void setBLDCMotorSpeed(void) {
 
 /* Stepper motor */
 void moveStepperMotor(enum Direction direction) {
+	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, RESET);
+
 	if(direction == LEFT) {
 		HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
 	} else {
@@ -80,6 +82,8 @@ void moveStepperMotor(enum Direction direction) {
 	TIM4->CCR3 = 500;
 	osDelay(35);
 	TIM4->CCR3 = 0;
+
+	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, SET);
 }
 
 void moveStepperMotorUntil(int targetLeftRightPosition) {

@@ -841,6 +841,7 @@ void StartDecelerateTask(void *argument)
 void StartTurnLeftTask(void *argument)
 {
   /* USER CODE BEGIN StartTurnLeftTask */
+	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, SET);
   /* Infinite loop */
   for(;;)
   {
@@ -877,6 +878,7 @@ void StartTurnLeftTask(void *argument)
 void StartTurnRightTask(void *argument)
 {
   /* USER CODE BEGIN StartTurnRightTask */
+	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, SET);
   /* Infinite loop */
   for(;;)
   {
