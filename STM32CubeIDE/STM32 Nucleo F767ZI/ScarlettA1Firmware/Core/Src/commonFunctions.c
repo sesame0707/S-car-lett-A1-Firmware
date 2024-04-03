@@ -113,12 +113,15 @@ void park(enum Direction direction) {
 	// Set LED stripes
 	stripesEffect = PARKING;
 	ommitToggle = true;
+	internalFunctionCall = true;
 	vTaskResume(LEDStripesTaskHandle);
 
 	// Toggle left/right blinkers
 	if(direction == LEFT) {
+		internalFunctionCall = true;
 		vTaskResume(LeftBlinkersTasHandle);
 	} else {
+		internalFunctionCall = true;
 		vTaskResume(RightBlinkersTaHandle);
 	}
 
@@ -131,8 +134,10 @@ void park(enum Direction direction) {
 	moveStepperMotorUntil(targetLeftRightPosition);
 
 	// Withdraw a little bit
+	internalFunctionCall = true;
 	vTaskResume(DecelerateTaskHandle);
 	osDelay(ACCELERATE_DECELERATE_DURATION);
+	internalFunctionCall = true;
 	vTaskResume(AccelerateTaskHandle);
 
 	// Turn left/right from the destination
@@ -140,8 +145,10 @@ void park(enum Direction direction) {
 	moveStepperMotorUntil(targetLeftRightPosition);
 
 	// Drive forward a little bit
+	internalFunctionCall = true;
 	vTaskResume(AccelerateTaskHandle);
 	osDelay(ACCELERATE_DECELERATE_DURATION / 2);
+	internalFunctionCall = true;
 	vTaskResume(DecelerateTaskHandle);
 
 	// Set LED stripes
@@ -151,5 +158,6 @@ void park(enum Direction direction) {
 		stripesEffect = NONE;
 	}
 	ommitToggle = true;
+	internalFunctionCall = true;
 	vTaskResume(LEDStripesTaskHandle);
 }

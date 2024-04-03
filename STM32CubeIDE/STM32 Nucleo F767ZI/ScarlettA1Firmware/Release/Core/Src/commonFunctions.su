@@ -2,4 +2,4 @@
 ../Core/Src/commonFunctions.c:37:6:setBLDCMotorSpeed	8	static
 ../Core/Src/commonFunctions.c:73:6:moveStepperMotor	8	static
 ../Core/Src/commonFunctions.c:85:6:moveStepperMotorUntil	16	static
-../Core/Src/commonFunctions.c:104:6:park	24	static
+../Core/Src/commonFunctions.c:104:6:park	32	static

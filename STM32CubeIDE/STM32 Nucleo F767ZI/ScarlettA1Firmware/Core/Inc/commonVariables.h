@@ -17,6 +17,8 @@ enum Direction {
 	RIGHT = 1
 };
 
+extern volatile bool internalFunctionCall;
+
 /* OLED */
 enum Header {
 	BOOTING_UP = 0,
@@ -60,6 +62,9 @@ extern volatile uint32_t BLDCMotorSpeedValue;
 /* Stepper motor */
 extern volatile int sliderLeftRightPreviousValue;
 extern volatile int sliderLeftRightCurrentValue;
+
+/* LiDAR sphere */
+extern volatile bool isParking;
 
 /* UART */
 extern volatile uint8_t RxBuffer[];

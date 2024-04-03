@@ -7,6 +7,9 @@
 
 #include "commonVariables.h"
 
+/* General */
+volatile bool internalFunctionCall = false;
+
 /* OLED */
 volatile bool isConnected = false;
 
@@ -26,6 +29,9 @@ volatile uint32_t BLDCMotorSpeedValue = 0.0;
 /* Stepper motor */
 volatile int sliderLeftRightPreviousValue = 0;
 volatile int sliderLeftRightCurrentValue = 0;
+
+/* LiDAR sphere */
+volatile bool isParking = false;
 
 /* UART */
 volatile uint8_t RxBuffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};

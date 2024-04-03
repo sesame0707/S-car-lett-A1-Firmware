@@ -449,6 +449,10 @@ void StartStopTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
+	  // Stop parking if applicable
+	  vTaskSuspend(ParkLeftTaskHandle);
+	  vTaskSuspend(ParkRightTaskHandle);
+
 	  // Stop BLDC motor
 	  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
 	  sliderAccelerateDecelerateCurrentValue = 0;
@@ -458,10 +462,18 @@ void StartStopTask(void *argument)
 	  isStopped = true;
 	  stripesEffect = STOP;
 	  ommitToggle = true;
+	  internalFunctionCall = true;
 	  vTaskResume(LEDStripesTaskHandle);
 
 	  // Home stepper motor
 	  moveStepperMotorUntil(0);
+
+	  // Reset parking state
+	  isParking = false;
+	  vTaskDelete(ParkLeftTaskHandle);
+	  vTaskDelete(ParkRightTaskHandle);
+	  ParkLeftTaskHandle = osThreadNew(StartParkLeftTask, NULL, &ParkLeftTask_attributes);
+	  ParkRightTaskHandle = osThreadNew(StartParkRightTask, NULL, &ParkRightTask_attributes);
 
 	  // Turn off all the lights
 	  HAL_GPIO_WritePin(DrivingLights_GPIO_Port, DrivingLights_Pin, RESET);
@@ -486,13 +498,18 @@ void StartDrivingLightsTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
 
-	  // Driving lights effect
-	  HAL_GPIO_TogglePin(DrivingLights_GPIO_Port, DrivingLights_Pin);
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
+
+		  // Driving lights effect
+		  HAL_GPIO_TogglePin(DrivingLights_GPIO_Port, DrivingLights_Pin);
+	  }
   }
   /* USER CODE END StartDrivingLightsTask */
 }
@@ -560,35 +577,40 @@ void StartLEDStripesTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // LED stripes effect
-	  if(ommitToggle == false) {
-		  if(isOn == false) {
-			  isOn = true;
-			  stripesEffect = DEFAULT;
-		  } else {
-			  isOn = false;
-			  stripesEffect = NONE;
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
+
+		  // LED stripes effect
+		  if(ommitToggle == false) {
+			  if(isOn == false) {
+				  isOn = true;
+				  stripesEffect = DEFAULT;
+			  } else {
+				  isOn = false;
+				  stripesEffect = NONE;
+			  }
 		  }
+		  ommitToggle = false;
+
+		  // Update LED color
+		  setLEDStripesEffect(stripesEffect, &desiredStripesColor);
+		  for(int i = 0; i < LED_COUNT; i ++) {
+			  leds[i].red = desiredStripesColor.red;
+			  leds[i].green = desiredStripesColor.green;
+			  leds[i].blue = desiredStripesColor.blue;
+		  }
+
+		  // Add LEDs to handle
+		  hws2812b.leds = leds;
+
+		  // Fill buffer
+		  ws2812b_fill_buffer(&hws2812b, dma_buf);
+
+		  // Transmit
+		  HAL_SPI_Transmit_DMA(&hspi1, dma_buf, ws2812b_required_buffer_len(&hws2812b));
+		  HAL_Delay(10); // 10ms delay
 	  }
-	  ommitToggle = false;
-
-	  // Update LED color
-	  setLEDStripesEffect(stripesEffect, &desiredStripesColor);
-	  for(int i = 0; i < LED_COUNT; i ++) {
-		  leds[i].red = desiredStripesColor.red;
-		  leds[i].green = desiredStripesColor.green;
-		  leds[i].blue = desiredStripesColor.blue;
-	  }
-
-	  // Add LEDs to handle
-	  hws2812b.leds = leds;
-
-	  // Fill buffer
-	  ws2812b_fill_buffer(&hws2812b, dma_buf);
-
-	  // Transmit
-	  HAL_SPI_Transmit_DMA(&hspi1, dma_buf, ws2812b_required_buffer_len(&hws2812b));
-	  HAL_Delay(10); // 10ms delay
   }
   /* USER CODE END StartLEDStripesTask */
 }
@@ -608,15 +630,20 @@ void StartLeftBlinkersTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
 
-	  // Left blinkers effect
-	  for(int i = 0; i < 6; i ++) {
-		  HAL_GPIO_TogglePin(LeftBlinkers_GPIO_Port, LeftBlinkers_Pin);
-		  osDelay(BLINKERS_DURATION);
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
+
+		  // Left blinkers effect
+		  for(int i = 0; i < 6; i ++) {
+			  HAL_GPIO_TogglePin(LeftBlinkers_GPIO_Port, LeftBlinkers_Pin);
+			  osDelay(BLINKERS_DURATION);
+		  }
 	  }
   }
   /* USER CODE END StartLeftBlinkersTask */
@@ -637,15 +664,20 @@ void StartRightBlinkersTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
 
-	  // Right blinkers effect
-	  for(int i = 0; i < 6; i ++) {
-		  HAL_GPIO_TogglePin(RightBlinkers_GPIO_Port, RightBlinkers_Pin);
-		  osDelay(BLINKERS_DURATION);
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
+
+		  // Right blinkers effect
+		  for(int i = 0; i < 6; i ++) {
+			  HAL_GPIO_TogglePin(RightBlinkers_GPIO_Port, RightBlinkers_Pin);
+			  osDelay(BLINKERS_DURATION);
+		  }
 	  }
   }
   /* USER CODE END StartRightBlinkersTask */
@@ -666,13 +698,18 @@ void StartParkLeftTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false) {
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
 
-	  // Park to the left
-	  park(LEFT);
+		  // Park to the left
+		  isParking = true;
+		  park(LEFT);
+		  isParking = false;
+	  }
   }
   /* USER CODE END StartParkLeftTask */
 }
@@ -692,13 +729,18 @@ void StartParkRightTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false) {
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
 
-	  // Park to the right
-	  park(RIGHT);
+		  // Park to the right
+		  isParking = true;
+		  park(RIGHT);
+		  isParking = false;
+	  }
   }
   /* USER CODE END StartParkRightTask */
 }
@@ -719,22 +761,27 @@ void StartAccelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
 
-	  // Accelerate if possible
-	  if(sliderAccelerateDecelerateCurrentValue < 4) {
-		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
-		  sliderAccelerateDecelerateCurrentValue ++;
-	  }
-	  setBLDCMotorSpeed();
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
 
-	  // Set withdraw lights appropriately
-	  if(sliderAccelerateDecelerateCurrentValue >= 0) {
-		  isWithdrawing = false;
-		  vTaskResume(WithdrawLightsTHandle);
+		  // Accelerate if possible
+		  if(sliderAccelerateDecelerateCurrentValue < 4) {
+			  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
+			  sliderAccelerateDecelerateCurrentValue ++;
+		  }
+		  setBLDCMotorSpeed();
+
+		  // Set withdraw lights appropriately
+		  if(sliderAccelerateDecelerateCurrentValue >= 0) {
+			  isWithdrawing = false;
+			  vTaskResume(WithdrawLightsTHandle);
+		  }
 	  }
   }
   /* USER CODE END StartAccelerateTask */
@@ -756,24 +803,29 @@ void StartDecelerateTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
 
-	  // Decelerate if possible
-	  if(sliderAccelerateDecelerateCurrentValue > -2) {
-		  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
-		  sliderAccelerateDecelerateCurrentValue --;
-	  }
-	  setBLDCMotorSpeed();
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
 
-	  // Set withdraw lights appropriately
-	  if(sliderAccelerateDecelerateCurrentValue >= 0) {
-		  vTaskResume(BrakeLightsTaskHandle);
-	  } else {
-		  isWithdrawing = true;
-		  vTaskResume(WithdrawLightsTHandle);
+		  // Decelerate if possible
+		  if(sliderAccelerateDecelerateCurrentValue > -2) {
+			  sliderAccelerateDeceleratePreviousValue = sliderAccelerateDecelerateCurrentValue;
+			  sliderAccelerateDecelerateCurrentValue --;
+		  }
+		  setBLDCMotorSpeed();
+
+		  // Set withdraw lights appropriately
+		  if(sliderAccelerateDecelerateCurrentValue >= 0) {
+			  vTaskResume(BrakeLightsTaskHandle);
+		  } else {
+			  isWithdrawing = true;
+			  vTaskResume(WithdrawLightsTHandle);
+		  }
 	  }
   }
   /* USER CODE END StartDecelerateTask */
@@ -794,17 +846,22 @@ void StartTurnLeftTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
 
-	  // Turn left if possible
-	  if(sliderLeftRightCurrentValue > -3) {
-		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
-		  sliderLeftRightCurrentValue --;
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
 
-		  moveStepperMotor(LEFT);
+		  // Turn left if possible
+		  if(sliderLeftRightCurrentValue > -3) {
+			  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
+			  sliderLeftRightCurrentValue --;
+
+			  moveStepperMotor(LEFT);
+		  }
 	  }
   }
   /* USER CODE END StartTurnLeftTask */
@@ -825,17 +882,22 @@ void StartTurnRightTask(void *argument)
   {
 	  vTaskSuspend(NULL);
 
-	  // Exit stopped state if applicable
-	  if(isStopped) {
-		  vTaskResume(ResumeFromStopTHandle);
-	  }
+	  // Parking interrupt guard
+	  if(isParking == false || internalFunctionCall == true) {
+		  internalFunctionCall = false;
 
-	  // Turn right if possible
-	  if(sliderLeftRightCurrentValue < 3) {
-		  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
-		  sliderLeftRightCurrentValue ++;
+		  // Exit stopped state if applicable
+		  if(isStopped) {
+			  vTaskResume(ResumeFromStopTHandle);
+		  }
 
-		  moveStepperMotor(RIGHT);
+		  // Turn right if possible
+		  if(sliderLeftRightCurrentValue < 3) {
+			  sliderLeftRightPreviousValue = sliderLeftRightCurrentValue;
+			  sliderLeftRightCurrentValue ++;
+
+			  moveStepperMotor(RIGHT);
+		  }
 	  }
   }
   /* USER CODE END StartTurnRightTask */
