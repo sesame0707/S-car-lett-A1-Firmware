@@ -69,8 +69,6 @@ void Error_Handler(void);
 #define RMII_MDIO_GPIO_Port GPIOA
 #define BLDCMotorStep_Pin GPIO_PIN_4
 #define BLDCMotorStep_GPIO_Port GPIOA
-#define STM32Reset_Pin GPIO_PIN_6
-#define STM32Reset_GPIO_Port GPIOA
 #define RMII_CRS_DV_Pin GPIO_PIN_7
 #define RMII_CRS_DV_GPIO_Port GPIOA
 #define RMII_RXD0_Pin GPIO_PIN_4

@@ -29,9 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-/* System libraries */
-#include <stdio.h>
-#include <time.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -75,25 +73,7 @@ extern osThreadId_t DispatcherTaskHandle;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-//	void delay(int number_of_seconds)
-//	{
-//	    // Converting time into milli_seconds
-//	    int milli_seconds = 1000 * number_of_seconds;
-//
-//	    // Storing start time
-//	    clock_t start_time = clock();
-//
-//	    // looping till required time is not achieved
-//	    while (clock() < start_time + milli_seconds)
-//	        ;
-//	}
-//
-//	int i;
-//	for (i = 0; i < 10; i++) {
-//		// delay of one second
-//		delay(1000);
-////		printf("%d seconds have passed\n", i + 1);
-//	}
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -102,7 +82,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  HAL_GPIO_WritePin(STM32Reset_GPIO_Port, STM32Reset_Pin, SET);
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -237,24 +217,6 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
-	  HAL_GPIO_WritePin(STM32Reset_GPIO_Port, STM32Reset_Pin, RESET);
-
-	  void delay(int number_of_seconds)
-	  {
-		// Converting time into milli_seconds
-		int milli_seconds = 1000 * number_of_seconds;
-
-		// Storing start time
-		clock_t start_time = clock();
-
-		// looping till required time is not achieved
-		while (clock() < start_time + milli_seconds)
-			;
-	  }
-
-	  delay(1);
-
-	  HAL_GPIO_WritePin(STM32Reset_GPIO_Port, STM32Reset_Pin, SET);
   }
   /* USER CODE END Error_Handler_Debug */
 }
