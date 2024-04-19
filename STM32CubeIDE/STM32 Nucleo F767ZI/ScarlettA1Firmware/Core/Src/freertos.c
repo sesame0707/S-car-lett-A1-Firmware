@@ -473,7 +473,6 @@ void StartStopTask(void *argument)
 	  ParkRightTaskHandle = osThreadNew(StartParkRightTask, NULL, &ParkRightTask_attributes);
 
 	  // Turn off all the lights
-	  HAL_GPIO_WritePin(DrivingLights_GPIO_Port, DrivingLights_Pin, RESET);
 	  HAL_GPIO_WritePin(BrakeLights_GPIO_Port, BrakeLights_Pin, RESET);
 	  HAL_GPIO_WritePin(WithdrawLights_GPIO_Port, WithdrawLights_Pin, RESET);
   }
@@ -838,7 +837,7 @@ void StartDecelerateTask(void *argument)
 void StartTurnLeftTask(void *argument)
 {
   /* USER CODE BEGIN StartTurnLeftTask */
-	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, SET);
+
   /* Infinite loop */
   for(;;)
   {
@@ -875,7 +874,7 @@ void StartTurnLeftTask(void *argument)
 void StartTurnRightTask(void *argument)
 {
   /* USER CODE BEGIN StartTurnRightTask */
-	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, SET);
+
   /* Infinite loop */
   for(;;)
   {

@@ -16,19 +16,19 @@ void setLEDStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripes
 		desiredStripesColor->blue = 0x00;
 		break;
 	case 1:
-		desiredStripesColor->red = 0x40;
-		desiredStripesColor->green = 0x20;
-		desiredStripesColor->blue = 0x00;
-		break;
-	case 2:
-		desiredStripesColor->red = 0x40;
-		desiredStripesColor->green = 0x40;
-		desiredStripesColor->blue = 0x40;
-		break;
-	case 3:
 		desiredStripesColor->red = 0x00;
 		desiredStripesColor->green = 0x00;
-		desiredStripesColor->blue = 0x40;
+		desiredStripesColor->blue = 0x2B;
+		break;
+	case 2:
+		desiredStripesColor->red = 0x1B;
+		desiredStripesColor->green = 0x1B;
+		desiredStripesColor->blue = 0x1B;
+		break;
+	case 3:
+		desiredStripesColor->red = 0x27;
+		desiredStripesColor->green = 0x13;
+		desiredStripesColor->blue = 0x00;
 		break;
 	}
 }
@@ -37,31 +37,31 @@ void setLEDStripesEffect(enum StripesEffect stripesEffect, struct DesiredStripes
 void setBLDCMotorSpeed(void) {
 	switch(sliderAccelerateDecelerateCurrentValue) {
 	case -2:
-	  BLDCMotorSpeedVoltage = 0.5;
-	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
+	  BLDCMotorSpeedVoltage = 0.65;
+	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
 	  break;
 	case -1:
-	  BLDCMotorSpeedVoltage = 0.4;
-	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
+	  BLDCMotorSpeedVoltage = 0.45;
+	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
 	  break;
 	case 0:
 	  BLDCMotorSpeedVoltage = 0.0;
 	  break;
 	case 1:
-	  BLDCMotorSpeedVoltage = 0.4;
-	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+	  BLDCMotorSpeedVoltage = 0.45;
+	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
 	  break;
 	case 2:
-	  BLDCMotorSpeedVoltage = 0.5;
-	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+	  BLDCMotorSpeedVoltage = 0.65;
+	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
 	  break;
 	case 3:
-	  BLDCMotorSpeedVoltage = 0.6;
-	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+	  BLDCMotorSpeedVoltage = 0.9;
+	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
 	  break;
 	case 4:
-	  BLDCMotorSpeedVoltage = 0.7;
-	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, RESET);
+	  BLDCMotorSpeedVoltage = 1.2;
+	  HAL_GPIO_WritePin(BLDCMotorDir_GPIO_Port, BLDCMotorDir_Pin, SET);
 	  break;
 	}
 
@@ -71,19 +71,15 @@ void setBLDCMotorSpeed(void) {
 
 /* Stepper motor */
 void moveStepperMotor(enum Direction direction) {
-	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, RESET);
-
 	if(direction == LEFT) {
-		HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
-	} else {
 		HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, RESET);
+	} else {
+		HAL_GPIO_WritePin(StepperMotorDir_GPIO_Port, StepperMotorDir_Pin, SET);
 	}
 
 	TIM4->CCR3 = 500;
-	osDelay(35);
+	osDelay(70);
 	TIM4->CCR3 = 0;
-
-	HAL_GPIO_WritePin(StepperMotorEn_GPIO_Port, StepperMotorEn_Pin, SET);
 }
 
 void moveStepperMotorUntil(int targetLeftRightPosition) {
@@ -140,18 +136,33 @@ void park(enum Direction direction) {
 	// Withdraw a little bit
 	internalFunctionCall = true;
 	vTaskResume(DecelerateTaskHandle);
-	osDelay(ACCELERATE_DECELERATE_DURATION);
+	osDelay(ACCELERATE_DECELERATE_DURATION * 0.60);
 	internalFunctionCall = true;
 	vTaskResume(AccelerateTaskHandle);
 
 	// Turn left/right from the destination
+	if(direction == LEFT) {
+		targetLeftRightPosition = 3;
+	} else {
+		targetLeftRightPosition = -3;
+	}
+	moveStepperMotorUntil(targetLeftRightPosition);
+
+	// Withdraw a little bit
+	internalFunctionCall = true;
+	vTaskResume(DecelerateTaskHandle);
+	osDelay(ACCELERATE_DECELERATE_DURATION * 0.65);
+	internalFunctionCall = true;
+	vTaskResume(AccelerateTaskHandle);
+
+	// Turn left/right to center position
 	targetLeftRightPosition = 0;
 	moveStepperMotorUntil(targetLeftRightPosition);
 
 	// Drive forward a little bit
 	internalFunctionCall = true;
 	vTaskResume(AccelerateTaskHandle);
-	osDelay(ACCELERATE_DECELERATE_DURATION / 2);
+	osDelay(ACCELERATE_DECELERATE_DURATION * 0.85);
 	internalFunctionCall = true;
 	vTaskResume(DecelerateTaskHandle);
 

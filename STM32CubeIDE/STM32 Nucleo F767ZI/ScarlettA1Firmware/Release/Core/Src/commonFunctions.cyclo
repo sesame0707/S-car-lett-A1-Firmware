@@ -1,5 +1,5 @@
 ../Core/Src/commonFunctions.c:11:6:setLEDStripesEffect	5
 ../Core/Src/commonFunctions.c:37:6:setBLDCMotorSpeed	8
 ../Core/Src/commonFunctions.c:73:6:moveStepperMotor	2
-../Core/Src/commonFunctions.c:89:6:moveStepperMotorUntil	5
-../Core/Src/commonFunctions.c:108:6:park	3
+../Core/Src/commonFunctions.c:85:6:moveStepperMotorUntil	5
+../Core/Src/commonFunctions.c:104:6:park	3
