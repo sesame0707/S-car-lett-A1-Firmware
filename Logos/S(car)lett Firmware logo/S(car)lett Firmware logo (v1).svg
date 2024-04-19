@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="600mm"
+   height="250mm"
+   viewBox="0 0 600 250"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="S(car)lett Firmware logo (v1).svg"
+   inkscape:export-filename="S(car)lett Connect logo (v1).png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.37282197"
+     inkscape:cx="818.08484"
+     inkscape:cy="367.46761"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="72.420624"
+       y="595.4585"
+       width="1353.0647"
+       height="618.34753"
+       id="rect113" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.3532425,0,0,0.3532425,-19.596227,-237.24617)"
+       id="text111"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:349.54px;font-family:Marlett;-inkscape-font-specification:'Marlett, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect113);shape-padding:2.00905;display:inline;fill:#000000;stroke-width:1.00157"
+       x="2821.3213"
+       y="0"><tspan
+         x="168.23541"
+         y="990.69931"
+         id="tspan284"><tspan
+           style="font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT, Normal';text-align:center;baseline-shift:baseline;text-anchor:middle;fill:#c20000"
+           id="tspan282">S(car)lett</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:88.1944px;font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT, Normal';text-align:center;letter-spacing:0px;text-anchor:middle;fill:#c20000;stroke-width:0.264999"
+       x="431.64212"
+       y="205.2338"
+       id="text312"><tspan
+         sodipodi:role="line"
+         id="tspan310"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:88.1944px;font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT';fill:#ff7f2a;fill-opacity:1;stroke-width:0.265"
+         x="431.64212"
+         y="205.2338">Firmware</tspan></text>
+  </g>
+</svg>
