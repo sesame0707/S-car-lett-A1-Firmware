@@ -3047,7 +3047,7 @@ void StartConnectionTask(void *argument)
 	  osTimerStart(ConnectionTaskTimerHandle, (ACKNOWLEDGE_PACKETS_FREQUENCY + TIME_MARGIN));
  80016e2:	4b08      	ldr	r3, [pc, #32]	; (8001704 <StartConnectionTask+0x30>)
  80016e4:	681b      	ldr	r3, [r3, #0]
- 80016e6:	f241 517c 	movw	r1, #5500	; 0x157c
+ 80016e6:	f640 51ac 	movw	r1, #3500	; 0xdac
  80016ea:	4618      	mov	r0, r3
  80016ec:	f007 fcb0 	bl	8009050 <osTimerStart>
 	  isConnected = true;

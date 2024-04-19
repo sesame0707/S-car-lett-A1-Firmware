@@ -837,7 +837,6 @@ void StartDecelerateTask(void *argument)
 void StartTurnLeftTask(void *argument)
 {
   /* USER CODE BEGIN StartTurnLeftTask */
-
   /* Infinite loop */
   for(;;)
   {
@@ -874,7 +873,6 @@ void StartTurnLeftTask(void *argument)
 void StartTurnRightTask(void *argument)
 {
   /* USER CODE BEGIN StartTurnRightTask */
-
   /* Infinite loop */
   for(;;)
   {
