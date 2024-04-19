@@ -1478,7 +1478,7 @@ Disassembly of section .text:
  80010be:	b508      	push	{r3, lr}
  80010c0:	2000      	movs	r0, #0
  80010c2:	f005 fa3d 	bl	8006540 <vTaskSuspend>
- 80010c6:	f241 517c 	movw	r1, #5500	; 0x157c
+ 80010c6:	f640 51ac 	movw	r1, #3500	; 0xdac
  80010ca:	6830      	ldr	r0, [r6, #0]
  80010cc:	f004 f9c0 	bl	8005450 <osTimerStart>
  80010d0:	2301      	movs	r3, #1
