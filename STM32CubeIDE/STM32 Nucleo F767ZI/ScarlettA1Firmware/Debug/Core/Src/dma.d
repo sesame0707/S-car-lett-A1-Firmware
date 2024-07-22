@@ -32,7 +32,10 @@ Core/Src/dma.o: ../Core/Src/dma.c ../Core/Inc/dma.h ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
+ D:/Projects/GitHub/S-car-lett-A1-Firmware/STM32CubeIDE/STM32\ Nucleo\ F767ZI/ScarlettA1Firmware/SEGGER/SEGGER/SEGGER_SYSVIEW.h \
+ D:/Projects/GitHub/S-car-lett-A1-Firmware/STM32CubeIDE/STM32\ Nucleo\ F767ZI/ScarlettA1Firmware/SEGGER/SEGGER/SEGGER.h \
+ D:/Projects/GitHub/S-car-lett-A1-Firmware/STM32CubeIDE/STM32\ Nucleo\ F767ZI/ScarlettA1Firmware/SEGGER/Config/Global.h
 ../Core/Inc/dma.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
@@ -69,3 +72,6 @@ Core/Src/dma.o: ../Core/Src/dma.c ../Core/Inc/dma.h ../Core/Inc/main.h \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
+D:/Projects/GitHub/S-car-lett-A1-Firmware/STM32CubeIDE/STM32\ Nucleo\ F767ZI/ScarlettA1Firmware/SEGGER/SEGGER/SEGGER_SYSVIEW.h:
+D:/Projects/GitHub/S-car-lett-A1-Firmware/STM32CubeIDE/STM32\ Nucleo\ F767ZI/ScarlettA1Firmware/SEGGER/SEGGER/SEGGER.h:
+D:/Projects/GitHub/S-car-lett-A1-Firmware/STM32CubeIDE/STM32\ Nucleo\ F767ZI/ScarlettA1Firmware/SEGGER/Config/Global.h:

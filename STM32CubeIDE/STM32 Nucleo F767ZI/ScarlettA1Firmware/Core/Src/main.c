@@ -50,7 +50,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+extern void vSetVarulMaxPRIGROUPValue( void );
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,6 +101,9 @@ int main(void)
   MX_TIM4_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
+  SEGGER_SYSVIEW_Conf();
+  vSetVarulMaxPRIGROUPValue();
+  SEGGER_SYSVIEW_Start();
   HAL_UART_Receive_IT(&huart6, RxBuffer, 1);
   HAL_DAC_Start(&hdac, DAC1_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
