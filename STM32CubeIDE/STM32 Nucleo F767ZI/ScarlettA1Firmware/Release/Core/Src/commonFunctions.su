@@ -1,5 +1,0 @@
-../Core/Src/commonFunctions.c:11:6:setLEDStripesEffect	0	static
-../Core/Src/commonFunctions.c:37:6:setBLDCMotorSpeed	8	static
-../Core/Src/commonFunctions.c:73:6:moveStepperMotor	8	static
-../Core/Src/commonFunctions.c:85:6:moveStepperMotorUntil	16	static
-../Core/Src/commonFunctions.c:104:6:park	40	static

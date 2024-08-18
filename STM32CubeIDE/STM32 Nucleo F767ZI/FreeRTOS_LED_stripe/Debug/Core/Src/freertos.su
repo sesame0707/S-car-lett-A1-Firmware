@@ -1,3 +1,0 @@
-../Core/Src/freertos.c:83:6:MX_FREERTOS_Init	8	static
-../Core/Src/freertos.c:128:6:StartDefaultTask	16	static
-../Core/Src/freertos.c:148:6:StartLEDStripeTask	16	static

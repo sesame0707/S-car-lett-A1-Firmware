@@ -1,7 +1,0 @@
-../Core/Src/ws281x.c:13:6:ws281x_init	24	static
-../Core/Src/ws281x.c:50:6:ws281x_update	56	static
-../Core/Src/ws281x.c:152:6:ws281x_set_pixel_rgb	16	static
-../Core/Src/ws281x.c:161:6:ws281x_set_pixel_color	16	static
-../Core/Src/ws281x.c:275:6:ws281x_off	16	static
-../Core/Src/ws281x.c:282:6:ws281x_test_slow	40	static
-../Core/Src/ws281x.c:313:6:ws281x_test_fast	40	static

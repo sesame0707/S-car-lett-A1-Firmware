@@ -1,8 +1,0 @@
-../Core/Src/freertos.c:121:6:MX_FREERTOS_Init	8	static
-../Core/Src/freertos.c:181:6:StartDefaultTask	16	static
-../Core/Src/freertos.c:204:6:StartAPI_dispatcher	16	static
-../Core/Src/freertos.c:263:6:StartAPI_START_ENGIN	16	static
-../Core/Src/freertos.c:282:6:StartAPI_BRAKE	16	static
-../Core/Src/freertos.c:303:6:StartAPI_WITHDRAW	16	static
-../Core/Src/freertos.c:324:6:StartAPI_TURN_LEFT	24	static
-../Core/Src/freertos.c:347:6:StartAPI_TURN_RIGHT	24	static

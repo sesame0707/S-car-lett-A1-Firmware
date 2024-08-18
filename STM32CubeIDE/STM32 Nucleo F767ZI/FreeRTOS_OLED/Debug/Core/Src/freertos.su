@@ -1,4 +1,0 @@
-../Core/Src/freertos.c:70:6:dashboard	24	static
-../Core/Src/freertos.c:102:6:MX_FREERTOS_Init	8	static
-../Core/Src/freertos.c:147:6:StartDefaultTask	16	static
-../Core/Src/freertos.c:166:6:StartOLEDPrintTask	40	static
